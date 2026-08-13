@@ -1,0 +1,1385 @@
+/* ===============================
+   NICK REYNA DJ - ESTILOS
+   =============================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #080808;
+    color: #ffffff;
+    line-height: 1.6;
+}
+
+/* ===============================
+   NAVEGACIÓN
+   =============================== */
+
+header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.navbar {
+    width: 100%;
+    padding: 20px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.3s ease;
+}
+
+
+.logo {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.logo span {
+    color: #ff1744;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+}
+
+.nav-links a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #ff1744;
+}
+
+/* ===============================
+   HERO
+   =============================== */
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 7% 80px;
+
+    background:
+        radial-gradient(circle at center, rgba(255, 23, 68, 0.18), transparent 45%),
+        #080808;
+}
+
+.hero-content {
+    max-width: 900px;
+}
+
+.subtitle {
+    color: #ff1744;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 5px;
+    margin-bottom: 20px;
+}
+
+.hero h1 {
+    font-size: clamp(60px, 11vw, 140px);
+    line-height: 0.95;
+    font-weight: 900;
+    letter-spacing: -5px;
+}
+
+.hero h1 span {
+    display: block;
+    color: #ff1744;
+}
+
+.hero-text {
+    max-width: 650px;
+    margin: 30px auto;
+    color: #bdbdbd;
+    font-size: 18px;
+}
+
+.button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 15px 30px;
+    background: #ff1744;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 800;
+    border-radius: 4px;
+    transition: 0.3s ease;
+}
+
+.button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(255, 23, 68, 0.3);
+}
+
+/* ===============================
+   SECCIONES
+   =============================== */
+
+.section {
+    padding: 110px 7%;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    opacity: 0;
+    transform: translateY(40px);
+    transition: 0.8s ease;
+}
+
+.section.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.section-label {
+    color: #ff1744;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 4px;
+    margin-bottom: 15px;
+}
+
+.section h2 {
+    font-size: clamp(38px, 6vw, 70px);
+    line-height: 1.05;
+    margin-bottom: 25px;
+}
+
+.section h2 span {
+    color: #ff1744;
+}
+
+.section-text {
+    max-width: 650px;
+    color: #aaaaaa;
+    font-size: 18px;
+}
+
+/* ===============================
+   SERVICIOS
+   =============================== */
+
+/* ========================================
+   LO QUE HAGO
+======================================== */
+
+.services {
+    margin-top: 45px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+
+/* TARJETAS */
+
+.service-card {
+    position: relative;
+
+    min-height: 180px;
+    padding: 32px 28px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 23, 68, 0.04),
+            rgba(255, 23, 68, 0)
+        ),
+        #111111;
+
+    border: 1px solid #292929;
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+/* LÍNEA DECORATIVA */
+
+.service-card::before {
+    content: "";
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 4px;
+    height: 0;
+
+    background: #ff1744;
+
+    transition: height 0.3s ease;
+}
+
+
+/* HOVER */
+
+.service-card:hover {
+    transform: translateY(-7px);
+
+    border-color: rgba(255, 23, 68, 0.6);
+
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.35),
+        0 0 20px rgba(255, 23, 68, 0.08);
+}
+
+.service-card:hover::before {
+    height: 100%;
+}
+
+
+/* TÍTULO */
+
+.service-card h3 {
+    margin: 0 0 14px;
+
+    color: #ffffff;
+
+    font-size: 21px;
+    font-weight: 800;
+}
+
+
+/* TEXTO */
+
+.service-card p {
+    margin: 0;
+
+    color: #999999;
+
+    font-size: 15px;
+    line-height: 1.65;
+}
+
+/* ===============================
+   SOBRE MÍ
+   =============================== */
+
+.about {
+    max-width: 900px;
+}
+
+.about p:not(.section-label) {
+    color: #b0b0b0;
+    font-size: 18px;
+    margin-bottom: 18px;
+}
+
+/* ===============================
+   CONTACTO
+   =============================== */
+
+.contact {
+    text-align: center;
+    max-width: 900px;
+}
+
+.contact p:not(.section-label) {
+    color: #aaaaaa;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+/* ===============================
+   FOOTER
+   =============================== */
+
+footer {
+    text-align: center;
+    padding: 30px 20px;
+    border-top: 1px solid #1c1c1c;
+    color: #666666;
+    font-size: 13px;
+}
+
+/* ===============================
+   RESPONSIVE / CELULAR
+   =============================== */
+
+@media (max-width: 800px) {
+
+    .navbar {
+        padding: 18px 5%;
+    }
+
+    .nav-links {
+        gap: 12px;
+    }
+
+    .nav-links a {
+        font-size: 11px;
+    }
+
+    .hero {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+
+    .hero h1 {
+        letter-spacing: -3px;
+    }
+
+    .hero-text {
+        font-size: 16px;
+    }
+
+    .section {
+        padding: 80px 5%;
+    }
+
+    .services {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 500px) {
+
+    .logo {
+        font-size: 17px;
+    }
+
+    .nav-links {
+        gap: 8px;
+    }
+
+    .nav-links a {
+        font-size: 10px;
+    }
+
+    .subtitle {
+        font-size: 10px;
+        letter-spacing: 3px;
+    }
+
+    .hero h1 {
+        font-size: 58px;
+    }
+
+    .section h2 {
+    font-size: 40px;
+}
+
+} /* CIERRA EL @media max-width: 500px */
+
+a.whatsapp-float {
+    position: fixed !important;
+    right: 25px !important;
+    bottom: 25px !important;
+    width: 62px !important;
+    height: 62px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: #25D366 !important;
+    border-radius: 50% !important;
+    overflow: hidden !important;
+    z-index: 9999 !important;
+    box-sizing: border-box !important;
+}
+
+a.whatsapp-float img {
+    width: 32px !important;
+    height: 32px !important;
+    max-width: 32px !important;
+    max-height: 32px !important;
+    object-fit: contain !important;
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+a.whatsapp-float:hover {
+    transform: scale(1.1);
+}
+
+@media (max-width: 500px) {
+    a.whatsapp-float {
+        width: 56px !important;
+        height: 56px !important;
+        right: 18px !important;
+        bottom: 18px !important;
+    }
+
+    a.whatsapp-float img {
+        width: 28px !important;
+        height: 28px !important;
+        max-width: 28px !important;
+        max-height: 28px !important;
+    }
+    } /* CIERRA EL @media DEL WHATSAPP */
+
+
+/* ========================================
+   SERVICIOS - DISEÑO ROJO / NEGRO
+======================================== */
+
+#servicios {
+    padding: 110px 20px 90px;
+    background:
+        radial-gradient(circle at center, rgba(255, 0, 45, 0.05), transparent 45%),
+        #050505;
+    color: #ffffff;
+}
+
+#servicios .contenedor-servicios {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+#servicios .titulo-servicios {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 55px;
+}
+
+#servicios .subtitulo {
+    display: inline-block;
+    margin-bottom: 10px;
+    color: #ff163d;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+#servicios .titulo-servicios h2 {
+    margin: 0 0 15px;
+    font-size: clamp(34px, 4vw, 52px);
+    line-height: 1.1;
+    color: #ffffff;
+}
+
+#servicios .titulo-servicios p {
+    margin: 0;
+    color: #a8a8a8;
+    font-size: 17px;
+    line-height: 1.6;
+}
+
+
+/* ========================================
+   GRID DE PLANES
+======================================== */
+
+#servicios .planes {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 28px;
+    align-items: stretch;
+    width: 100%;
+}
+
+
+/* ========================================
+   TARJETAS
+======================================== */
+
+#servicios .plan {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 520px;
+    padding: 38px 28px 24px;
+    background: linear-gradient(
+        145deg,
+        #151515 0%,
+        #0c0c0c 100%
+    );
+    border: 1px solid rgba(255, 22, 61, 0.5);
+    border-radius: 18px;
+    box-sizing: border-box;
+    overflow: visible;
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+#servicios .plan:hover {
+    transform: translateY(-8px);
+    border-color: #ff163d;
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.5),
+        0 0 22px rgba(255, 22, 61, 0.14);
+}
+
+
+/* ========================================
+   PLAN DESTACADO
+======================================== */
+
+#servicios .plan-destacado {
+    border: 2px solid #ff163d;
+    box-shadow:
+        0 0 12px rgba(255, 22, 61, 0.55),
+        0 0 35px rgba(255, 22, 61, 0.16);
+    transform: scale(1.025);
+    z-index: 2;
+}
+
+#servicios .plan-destacado:hover {
+    transform: scale(1.025) translateY(-8px);
+}
+
+#servicios .etiqueta-plan {
+    position: absolute;
+    top: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 9px 22px;
+    border-radius: 7px;
+    background: #ff163d;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 0.6px;
+    box-shadow: 0 0 18px rgba(255, 22, 61, 0.55);
+    white-space: nowrap;
+}
+
+
+/* ========================================
+   TÍTULO DEL PLAN
+======================================== */
+
+#servicios .plan h3 {
+    margin: 12px 0 18px;
+    padding-bottom: 18px;
+    text-align: center;
+    font-size: 24px;
+    letter-spacing: 1px;
+    color: #ffffff;
+    border-bottom: 1px solid rgba(255, 22, 61, 0.45);
+}
+
+
+/* ========================================
+   PRECIO
+======================================== */
+
+#servicios .precio {
+    margin: 0 0 8px;
+    text-align: center;
+    color: #ffffff;
+    font-size: 60px;
+    line-height: 1;
+    font-weight: 900;
+}
+
+#servicios .precio span {
+    margin-right: 5px;
+    color: #ff163d;
+    font-size: 28px;
+    vertical-align: 18px;
+}
+
+
+/* ========================================
+   DESCRIPCIÓN
+======================================== */
+
+#servicios .descripcion-plan {
+    min-height: 48px;
+    margin: 0 0 20px;
+    text-align: center;
+    color: #ff163d;
+    font-size: 14px;
+    line-height: 1.45;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+
+/* ========================================
+   LISTA
+======================================== */
+
+#servicios .plan ul {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 0 28px !important;
+}
+
+#servicios .plan ul li {
+    position: relative;
+    padding: 9px 0 9px 28px !important;
+    margin: 0 !important;
+    color: #eeeeee;
+    font-size: 15px;
+    line-height: 1.4;
+    border: none !important;
+}
+
+#servicios .plan ul li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    top: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #ff163d;
+    color: #050505;
+    font-size: 12px;
+    font-weight: 900;
+}
+
+
+/* ========================================
+   BOTÓN
+======================================== */
+
+#servicios .boton-plan {
+    display: block;
+    width: 100%;
+    margin-top: auto;
+    padding: 15px 18px;
+    box-sizing: border-box;
+    border-radius: 9px;
+    background: #ff163d;
+    color: #ffffff !important;
+    text-align: center;
+    text-decoration: none !important;
+    font-size: 15px;
+    font-weight: 800;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+#servicios .boton-plan:hover {
+    transform: translateY(-2px);
+    background: #ff2a4d;
+    box-shadow: 0 0 20px rgba(255, 22, 61, 0.35);
+}
+
+
+/* ========================================
+   COBERTURA
+======================================== */
+
+#servicios .cobertura-servicios {
+    position: relative;
+    max-width: 1000px;
+    margin: 45px auto 0;
+    padding: 22px 28px 22px 65px;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(255, 22, 61, 0.08),
+            rgba(255, 22, 61, 0.01)
+        ),
+        #0d0d0d;
+
+    border: 1px solid rgba(255, 22, 61, 0.45);
+    border-radius: 14px;
+
+    text-align: left;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.25),
+        inset 3px 0 0 #ff163d;
+}
+#servicios .cobertura-servicios::before {
+    content: "📍";
+    position: absolute;
+    left: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 25px;
+}
+
+#servicios .cobertura-servicios p {
+    margin: 0 0 5px;
+    color: #ffffff;
+    font-size: 16px;
+}
+
+#servicios .cobertura-servicios small {
+    color: #9d9d9d;
+    font-size: 14px;
+}
+
+
+/* ========================================
+   ADICIONALES
+======================================== */
+
+#servicios .adicionales {
+    margin-top: 60px;
+    padding-top: 5px;
+    text-align: center;
+}
+
+#servicios .adicionales > h3 {
+    margin: 0 0 10px;
+    color: #ffffff;
+    font-size: 34px;
+    line-height: 1.1;
+}
+
+#servicios .adicionales > h3::before {
+    content: "ADICIONALES";
+    display: block;
+    margin-bottom: 10px;
+    color: #ff163d;
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: 3px;
+}
+
+#servicios .adicionales > p {
+    max-width: 600px;
+    margin: 0 auto 32px;
+    color: #999999;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+
+/* CONTENEDOR DE LAS 3 CAJITAS */
+
+#servicios .adicionales-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+
+/* CAJITA INDIVIDUAL */
+
+#servicios .adicional {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+
+    min-height: 115px;
+    padding: 22px 25px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 22, 61, 0.035),
+            rgba(255, 22, 61, 0)
+        ),
+        #101010;
+
+    border: 1px solid #303030;
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+/* PEQUEÑA LÍNEA ROJA ARRIBA */
+
+#servicios .adicional::before {
+    content: "";
+    position: absolute;
+
+    top: 0;
+    left: 50%;
+
+    width: 0;
+    height: 2px;
+
+    background: #ff163d;
+
+    transform: translateX(-50%);
+
+    transition: width 0.3s ease;
+}
+
+
+/* EFECTO AL PASAR EL MOUSE */
+
+#servicios .adicional:hover {
+    transform: translateY(-6px);
+
+    border-color: rgba(255, 22, 61, 0.65);
+
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.35),
+        0 0 20px rgba(255, 22, 61, 0.10);
+}
+
+#servicios .adicional:hover::before {
+    width: 70%;
+}
+
+
+/* ICONO */
+
+#servicios .adicional span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 52px;
+    height: 52px;
+
+    flex-shrink: 0;
+
+    margin: 0;
+
+    border: 1px solid rgba(255, 22, 61, 0.7);
+    border-radius: 50%;
+
+    background: rgba(255, 22, 61, 0.06);
+
+    font-size: 25px;
+
+    box-shadow:
+        inset 0 0 10px rgba(255, 22, 61, 0.05),
+        0 0 10px rgba(255, 22, 61, 0.08);
+}
+
+
+/* NOMBRE */
+
+#servicios .adicional h4 {
+    margin: 0;
+    color: #ffffff;
+
+    font-size: 17px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+
+    text-transform: uppercase;
+}
+
+
+/* PRECIO */
+
+#servicios .adicional strong {
+    display: block;
+
+    margin-left: 2px;
+
+    color: #ff163d;
+
+    font-size: 21px;
+    font-weight: 900;
+
+    white-space: nowrap;
+}
+
+
+/* ========================================
+   TABLET
+======================================== */
+/* ========================================
+   CELULAR
+======================================== */
+
+@media (max-width: 600px) {
+    #servicios .planes { grid-template-columns: 1fr; max-width: 620px; margin: 0 auto; gap: 38px; }
+    #servicios .adicionales { margin-top: 50px; }
+    #servicios .adicionales > h3 { font-size: 30px; }
+    #servicios .adicionales-grid { grid-template-columns: 1fr; gap: 14px; }
+    #servicios .adicional { min-height: 95px; justify-content: flex-start; padding: 18px 22px; }
+    #servicios .adicional span { width: 46px; height: 46px; font-size: 22px; }
+    #servicios .adicional h4 { font-size: 16px; }
+    #servicios .adicional strong { margin-left: auto; font-size: 20px; }
+    #servicios .plan-destacado { transform: none; }
+    #servicios .plan-destacado:hover { transform: translateY(-8px); }
+    #servicios { padding: 80px 16px 65px; }
+    #servicios .titulo-servicios { margin-bottom: 45px; }
+    #servicios .titulo-servicios h2 { font-size: 34px; }
+    #servicios .titulo-servicios p { font-size: 15px; }
+    #servicios .plan { padding: 34px 22px 22px; border-radius: 16px; }
+    #servicios .precio { font-size: 52px; }
+    #servicios .precio span { font-size: 24px; vertical-align: 14px; }
+    #servicios .cobertura-servicios { padding: 20px 18px 20px 55px; margin-top: 32px; }
+    #servicios .cobertura-servicios::before { left: 18px; top: 22px; transform: none; font-size: 22px; }
+    #servicios .cobertura-servicios p { font-size: 15px; line-height: 1.45; margin-bottom: 8px; }
+    #servicios .cobertura-servicios small { display: block; font-size: 13px; line-height: 1.55; }
+}
+
+/* ICONOS DE LOS PLANES */
+
+#servicios .icono-plan {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #ff163d;
+    border-radius: 50%;
+
+    color: #ff163d;
+    font-size: 23px;
+
+    background: rgba(255, 22, 61, 0.04);
+
+    box-shadow:
+        inset 0 0 12px rgba(255, 22, 61, 0.05),
+        0 0 12px rgba(255, 22, 61, 0.08);
+}
+.logo img {
+    display: block;
+    width: 145px;
+    height: auto;
+
+    filter: brightness(0) invert(1);
+}
+/* ========================================
+   SOBRE MÍ
+======================================== */
+
+#sobre-mi {
+    position: relative;
+    overflow: hidden;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 0.95fr 1.05fr;
+    gap: 70px;
+    align-items: center;
+}
+
+
+/* FOTO */
+
+.about-image {
+    position: relative;
+    min-height: 560px;
+
+    border-radius: 18px;
+    overflow: hidden;
+
+    border: 1px solid rgba(255, 23, 68, 0.35);
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.45),
+        0 0 30px rgba(255, 23, 68, 0.08);
+}
+
+.about-image img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+    min-height: 560px;
+
+    object-fit: cover;
+    object-position: center;
+
+    transition: transform 0.6s ease;
+}
+
+.about-image:hover img {
+    transform: scale(1.035);
+}
+
+
+/* DEGRADADO SOBRE FOTO */
+
+.about-image::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(0, 0, 0, 0.55),
+            transparent 45%
+        );
+
+    pointer-events: none;
+}
+
+
+/* CAJITA 8+ */
+
+.about-experience {
+    position: absolute;
+    left: 22px;
+    bottom: 22px;
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 14px 18px;
+
+    background: rgba(8, 8, 8, 0.88);
+    backdrop-filter: blur(8px);
+
+    border: 1px solid rgba(255, 23, 68, 0.6);
+    border-radius: 10px;
+}
+
+.about-experience strong {
+    color: #ff1744;
+    font-size: 35px;
+    line-height: 1;
+}
+
+.about-experience span {
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 800;
+    line-height: 1.25;
+    letter-spacing: 1px;
+}
+
+
+/* TEXTO */
+
+.about-content .section-label {
+    margin-bottom: 14px;
+}
+
+.about-content h2 {
+    margin: 0 0 25px;
+
+    color: #ffffff;
+
+    font-size: clamp(38px, 4vw, 58px);
+    line-height: 1.08;
+}
+
+.about-content h2 span {
+    color: #ff1744;
+}
+
+.about-content > p:not(.section-label) {
+    max-width: 620px;
+
+    margin: 0 0 18px;
+
+    color: #a8a8a8;
+
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+
+/* ESTADÍSTICAS */
+
+.about-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 12px;
+
+    margin-top: 35px;
+    padding-top: 28px;
+
+    border-top: 1px solid #292929;
+}
+
+.about-stat {
+    padding-right: 10px;
+}
+
+.about-stat strong {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #ff1744;
+
+    font-size: 27px;
+    font-weight: 900;
+}
+
+.about-stat span {
+    display: block;
+
+    color: #dddddd;
+
+    font-size: 10px;
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: 0.7px;
+}
+
+
+/* ========================================
+   SOBRE MÍ - MÓVIL
+======================================== */
+
+@media (max-width: 800px) {
+
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 38px;
+    }
+
+    .about-image {
+        min-height: 430px;
+    }
+
+    .about-image img {
+        min-height: 430px;
+        object-position: center;
+    }
+
+    .about-content h2 {
+        font-size: 38px;
+    }
+
+    .about-content > p:not(.section-label) {
+        font-size: 15px;
+        line-height: 1.7;
+    }
+
+    .about-stats {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+    }
+
+    .about-stat strong {
+        font-size: 23px;
+    }
+
+    .about-stat span {
+        font-size: 9px;
+    }
+}
+/* ========================================
+   FOOTER
+======================================== */
+
+.footer {
+    position: relative;
+
+    padding: 70px 20px 35px;
+
+    background: #070707;
+
+    border-top: 1px solid #202020;
+
+    overflow: hidden;
+}
+
+
+/* PEQUEÑO RESPLANDOR ROJO */
+
+.footer::before {
+    content: "";
+
+    position: absolute;
+
+    top: -150px;
+    left: 50%;
+
+    width: 500px;
+    height: 250px;
+
+    transform: translateX(-50%);
+
+    background: rgba(255, 23, 68, 0.08);
+
+    filter: blur(90px);
+
+    pointer-events: none;
+}
+
+
+/* CONTENIDO */
+
+.footer-content {
+    position: relative;
+    z-index: 1;
+
+    max-width: 900px;
+    margin: 0 auto;
+
+    text-align: center;
+}
+
+
+/* LOGO */
+
+.footer-logo img {
+    display: block;
+
+    width: 150px;
+    height: auto;
+
+    margin: 0 auto 22px;
+
+    filter: brightness(0) invert(1);
+}
+
+
+/* DESCRIPCIÓN */
+
+.footer-description {
+    margin: 0;
+
+    color: #b5b5b5;
+
+    font-size: 12px;
+    font-weight: 800;
+
+    letter-spacing: 2px;
+}
+
+
+/* LÍNEA ROJA */
+
+.footer-line {
+    width: 45px;
+    height: 2px;
+
+    margin: 25px auto;
+
+    background: #ff1744;
+
+    border-radius: 20px;
+
+    box-shadow: 0 0 10px rgba(255, 23, 68, 0.4);
+}
+
+
+/* REDES */
+
+.footer-socials {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 32px;
+
+    margin-bottom: 38px;
+}
+
+.footer-socials a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    color: #ffffff;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition:
+        color 0.25s ease,
+        transform 0.25s ease;
+}
+
+.footer-socials a svg {
+    width: 20px;
+    height: 20px;
+
+    fill: currentColor;
+
+    transition:
+        transform 0.25s ease,
+        filter 0.25s ease;
+}
+
+.footer-socials a:hover {
+    color: #ff1744;
+    transform: translateY(-2px);
+}
+
+.footer-socials a:hover svg {
+    transform: scale(1.12);
+    filter: drop-shadow(0 0 5px rgba(255, 23, 68, 0.45));
+}
+
+
+/* COPYRIGHT */
+
+.footer-copy {
+    margin: 0;
+
+    padding-top: 25px;
+
+    border-top: 1px solid #1e1e1e;
+
+    color: #666666;
+
+    font-size: 12px;
+}
+@media (max-width: 600px) {
+
+    .footer {
+        padding: 55px 18px 28px;
+    }
+
+    .footer-logo img {
+        width: 125px;
+    }
+
+    .footer-description {
+        font-size: 10px;
+        line-height: 1.7;
+        letter-spacing: 1.5px;
+    }
+
+    .footer-socials {
+        gap: 22px;
+        margin-bottom: 32px;
+    }
+
+    .footer-socials a {
+        font-size: 13px;
+    }
+
+    .footer-copy {
+        font-size: 10px;
+        line-height: 1.6;
+    }
+}
