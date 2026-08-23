@@ -2,6 +2,55 @@
 // NICK REYNA DJ - SCRIPT
 // ===============================
 
+
+// ===============================
+// SUPABASE / CRM
+// ===============================
+const SUPABASE_URL = "https://fmupremfenpregsliwqh.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_yXXFHj6caCNXGJDorifV2w_IeAHpLMC";
+const SUPABASE_COTIZACIONES_ENDPOINT = `${SUPABASE_URL}/rest/v1/cotizaciones`;
+
+const cotizacionesRegistradas = new Set();
+
+async function registrarCotizacionCRM(datos, codigo) {
+    if (cotizacionesRegistradas.has(codigo)) return true;
+
+    const payload = {
+        codigo,
+        cliente: cotNombre.value.trim(),
+        whatsapp: cotWhatsapp.value.trim(),
+        acepta_contacto: cotConsentimiento.checked,
+        fecha_evento: cotFecha.value || null,
+        tipo_evento: cotTipo.value,
+        lugar: cotLugar.value.trim() || null,
+        plan: datos.plan,
+        extra_led: datos.led,
+        extra_parlante: datos.parlante,
+        extra_laser: datos.laser,
+        total: Number(datos.total.toFixed(2)),
+        estado: "Nueva"
+    };
+
+    const respuesta = await fetch(SUPABASE_COTIZACIONES_ENDPOINT, {
+        method: "POST",
+        headers: {
+            "apikey": SUPABASE_PUBLISHABLE_KEY,
+            "Content-Type": "application/json",
+            "Prefer": "return=minimal"
+        },
+        body: JSON.stringify(payload)
+    });
+
+    if (!respuesta.ok) {
+        const detalle = await respuesta.text();
+        console.error("No se pudo registrar la cotización en el CRM:", respuesta.status, detalle);
+        return false;
+    }
+
+    cotizacionesRegistradas.add(codigo);
+    return true;
+}
+
 // Animación suave al hacer clic en los enlaces del menú
 document.querySelectorAll('a[href^="#"]').forEach(link => {
     link.addEventListener("click", function (e) {
@@ -49,12 +98,33 @@ sections.forEach(section => {
 // ===============================
 const cotPlan = document.getElementById('cot-plan');
 const cotNombre = document.getElementById('cot-nombre');
+const cotWhatsapp = document.getElementById('cot-whatsapp');
+const cotConsentimiento = document.getElementById('cot-consentimiento');
 const cotFecha = document.getElementById('cot-fecha');
 const cotTipo = document.getElementById('cot-tipo');
 const cotLugar = document.getElementById('cot-lugar');
 const extraLed = document.getElementById('extra-led');
 const extraParlante = document.getElementById('extra-parlante');
 const extraLaser = document.getElementById('extra-laser');
+
+let codigoCotizacionActual = '';
+
+function generarCodigoCotizacion() {
+    const ahora = new Date();
+    const fecha = [
+        String(ahora.getFullYear()).slice(-2),
+        String(ahora.getMonth() + 1).padStart(2, '0'),
+        String(ahora.getDate()).padStart(2, '0')
+    ].join('');
+    const aleatorio = Math.floor(1000 + Math.random() * 9000);
+    return `NR-${fecha}-${aleatorio}`;
+}
+
+function obtenerCodigoCotizacion() {
+    if (!codigoCotizacionActual) codigoCotizacionActual = generarCodigoCotizacion();
+    return codigoCotizacionActual;
+}
+
 
 function datosCotizacion() {
     const opt = cotPlan.options[cotPlan.selectedIndex];
@@ -67,31 +137,102 @@ function datosCotizacion() {
     return { plan, base, led, parlante, laser, total };
 }
 
+
+function datosMinimosCompletos() {
+    const telefono = (cotWhatsapp.value || "").replace(/\D/g, "");
+    return Boolean(
+        cotNombre.value.trim() &&
+        cotFecha.value &&
+        telefono.length >= 9 &&
+        cotConsentimiento.checked
+    );
+}
+
 function actualizarCotizador() {
     const d = datosCotizacion();
     document.getElementById('resumen-plan').textContent = `Plan ${d.plan}`;
     document.getElementById('cot-total').textContent = `S/${d.total.toFixed(2)}`;
+
     const filas = [`<div class="resumen-linea"><span>Plan ${d.plan}</span><strong>S/${d.base.toFixed(2)}</strong></div>`];
     if (d.led) filas.push(`<div class="resumen-linea"><span>${d.led} × PAR LED</span><strong>S/${(d.led*20).toFixed(2)}</strong></div>`);
     if (d.parlante) filas.push(`<div class="resumen-linea"><span>${d.parlante} × Parlante</span><strong>S/${(d.parlante*60).toFixed(2)}</strong></div>`);
     if (d.laser) filas.push(`<div class="resumen-linea"><span>${d.laser} × Láser</span><strong>S/${(d.laser*20).toFixed(2)}</strong></div>`);
     document.getElementById('resumen-detalle').innerHTML = filas.join('');
 
-    const texto = `Hola Nick, hice una cotización en tu web.%0A%0A👤 Cliente: ${encodeURIComponent(cotNombre.value || 'Por completar')}%0A📅 Fecha: ${encodeURIComponent(cotFecha.value || 'Por confirmar')}%0A🎉 Evento: ${encodeURIComponent(cotTipo.value)}%0A📍 Lugar: ${encodeURIComponent(cotLugar.value || 'Por confirmar')}%0A🎧 Plan: ${encodeURIComponent(d.plan)} (S/${d.base})%0A💡 PAR LED: ${d.led}%0A🔊 Parlantes adicionales: ${d.parlante}%0A🔴 Láser: ${d.laser}%0A%0A💰 Total referencial: S/${d.total.toFixed(2)}%0A%0AQuisiera confirmar disponibilidad.`;
-    document.getElementById('btn-whatsapp-cot').href = `https://wa.me/51969179145?text=${texto}`;
+    const codigo = obtenerCodigoCotizacion();
+
+    const mensajeConsulta = `Hola Nick 👋, hice una cotización en tu web.
+
+🧾 Código: ${codigo}
+👤 Cliente: ${cotNombre.value || 'Por completar'}
+📱 WhatsApp: ${cotWhatsapp.value || 'Por completar'}
+📅 Fecha: ${cotFecha.value || 'Por confirmar'}
+🎉 Evento: ${cotTipo.value}
+📍 Lugar: ${cotLugar.value || 'Por confirmar'}
+🎧 Plan: ${d.plan} (S/${d.base})
+💡 PAR LED: ${d.led}
+🔊 Parlantes adicionales: ${d.parlante}
+🔴 Láser: ${d.laser}
+
+💰 Total referencial: S/${d.total.toFixed(2)}
+
+Quisiera confirmar disponibilidad.`;
+
+    const mensajeSeparacion = `Hola Nick 👋, quisiera solicitar la separación de mi fecha.
+
+🧾 Cotización: ${codigo}
+👤 Cliente: ${cotNombre.value || 'Por completar'}
+📅 Fecha: ${cotFecha.value || 'Por confirmar'}
+🎉 Evento: ${cotTipo.value}
+📍 Lugar: ${cotLugar.value || 'Por confirmar'}
+🎧 Plan: ${d.plan}
+💰 Total referencial: S/${d.total.toFixed(2)}
+
+🔒 Entiendo que primero debo confirmar disponibilidad contigo antes de realizar cualquier pago.`;
+
+    document.getElementById('btn-whatsapp-cot').href =
+        `https://api.whatsapp.com/send/?phone=51969179145&text=${encodeURIComponent(mensajeConsulta)}`;
+
+    const btnSeparar = document.getElementById('btn-separar-fecha');
+    btnSeparar.href =
+        `https://api.whatsapp.com/send/?phone=51969179145&text=${encodeURIComponent(mensajeSeparacion)}`;
+
+    const listo = datosMinimosCompletos();
+    btnSeparar.classList.toggle('cot-btn-deshabilitado', !listo);
+    btnSeparar.setAttribute('aria-disabled', listo ? 'false' : 'true');
+    btnSeparar.tabIndex = listo ? 0 : -1;
 }
 
-[cotPlan, cotNombre, cotFecha, cotTipo, cotLugar, extraLed, extraParlante, extraLaser].forEach(el => {
+[cotPlan, cotNombre, cotWhatsapp, cotFecha, cotTipo, cotLugar, extraLed, extraParlante, extraLaser].forEach(el => {
     if (el) el.addEventListener('input', actualizarCotizador);
+});
+if (cotConsentimiento) cotConsentimiento.addEventListener('change', actualizarCotizador);
+
+document.getElementById('btn-separar-fecha')?.addEventListener('click', function (e) {
+    if (!datosMinimosCompletos()) {
+        e.preventDefault();
+        alert('Completa tu nombre, WhatsApp y fecha, y acepta el contacto antes de solicitar la separación.');
+    }
 });
 
 function escaparHtml(texto='') {
     return texto.replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
 }
 
-document.getElementById('btn-pdf')?.addEventListener('click', () => {
-    if (!cotNombre.value || !cotFecha.value) {
-        alert('Completa al menos el nombre y la fecha del evento para generar la cotización.');
+document.getElementById('btn-pdf')?.addEventListener('click', async () => {
+    const telefonoLimpio = cotWhatsapp.value.replace(/\D/g, '');
+    if (!cotNombre.value || !cotFecha.value || !cotWhatsapp.value) {
+        alert('Completa tu nombre, WhatsApp y la fecha del evento para generar la cotización.');
+        return;
+    }
+    if (telefonoLimpio.length < 9) {
+        alert('Revisa el número de WhatsApp. Debe tener al menos 9 dígitos.');
+        cotWhatsapp.focus();
+        return;
+    }
+    if (!cotConsentimiento.checked) {
+        alert('Marca la casilla de autorización para poder contactarte sobre tu cotización.');
+        cotConsentimiento.focus();
         return;
     }
     const d = datosCotizacion();
@@ -101,7 +242,7 @@ document.getElementById('btn-pdf')?.addEventListener('click', () => {
         d.parlante ? `${d.parlante} × Parlante — S/${(d.parlante*60).toFixed(2)}` : '',
         d.laser ? `${d.laser} × Láser — S/${(d.laser*20).toFixed(2)}` : ''
     ].filter(Boolean);
-    const numero = `NR-${new Date().toISOString().slice(0,10).replaceAll('-','')}`;
+    const numero = obtenerCodigoCotizacion();
     const inclusionesPlan = {
         "Básico": ["3 horas de show", "DJ profesional", "Todos los géneros musicales", "1 micrófono", "Movilidad incluida"],
         "Estándar": ["5 horas de show", "DJ profesional", "1 parlante JBL EON 615", "Todos los géneros musicales", "1 micrófono", "Movilidad incluida"],
@@ -162,7 +303,7 @@ table{width:100%;border-collapse:collapse;font-size:13px}td{padding:11px 4px;bor
 <p class="saludo">Gracias por considerar a <strong>Nick Reyna DJ</strong> para ser parte de tu evento. A continuación encontrarás el detalle del servicio seleccionado y el presupuesto correspondiente.</p>
 
 <div class="meta">
-<div class="box"><div class="label">Cliente</div><strong>${escaparHtml(cotNombre.value)}</strong><p>${escaparHtml(cotTipo.value)}</p></div>
+<div class="box"><div class="label">Cliente</div><strong>${escaparHtml(cotNombre.value)}</strong><p>${escaparHtml(cotTipo.value)}</p><p>📱 ${escaparHtml(cotWhatsapp.value)}</p></div>
 <div class="box"><div class="label">Evento</div><strong>${fechaEvento}</strong><p>📍 ${escaparHtml(cotLugar.value || "Lugar por confirmar")}</p></div>
 </div>
 
@@ -209,6 +350,18 @@ table{width:100%;border-collapse:collapse;font-size:13px}td{padding:11px 4px;bor
     }
 
     setTimeout(() => URL.revokeObjectURL(url), 60000);
+
+    const guardadoCRM = await registrarCotizacionCRM(d, numero);
+
+    const exito = document.getElementById('cot-exito');
+    const codigoVisible = document.getElementById('cot-codigo-visible');
+    if (codigoVisible) {
+        codigoVisible.textContent = guardadoCRM
+            ? `Código: ${numero} · Registrada ✅`
+            : `Código: ${numero} · PDF creado, registro pendiente ⚠️`;
+    }
+    if (exito) exito.hidden = false;
 });
+
 
 actualizarCotizador();

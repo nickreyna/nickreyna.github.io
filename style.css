@@ -1608,3 +1608,116 @@ a.whatsapp-float:hover {
 .cot-btn:hover { transform:translateY(-2px); }
 @media (max-width:800px) { .cotizador-grid{grid-template-columns:1fr;} .resumen-cotizador{position:static;} }
 @media (max-width:600px) { .cotizador-form{grid-template-columns:1fr; padding:20px;} .campo-completo{grid-column:auto;} .resumen-cotizador{padding:22px;} .cotizador-header>p:last-child{font-size:15px;} }
+
+
+/* ========================================
+   COTIZADOR V3 - FLUJO SIMPLE
+======================================== */
+.cot-paso{
+    display:flex;
+    align-items:center;
+    gap:13px;
+    margin-top:8px;
+    padding-top:8px;
+}
+.cot-paso > span{
+    width:34px;
+    height:34px;
+    flex:0 0 34px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    background:#ff1744;
+    color:#fff;
+    font-weight:900;
+    box-shadow:0 0 16px rgba(255,23,68,.25);
+}
+.cot-paso strong{display:block;color:#fff;font-size:15px}
+.cot-paso small{display:block;color:#888;font-size:12px;line-height:1.45;margin-top:2px}
+.cot-exito{
+    margin-top:16px;
+    padding:15px;
+    border:1px solid rgba(255,23,68,.45);
+    border-radius:10px;
+    background:rgba(255,23,68,.06);
+    text-align:center;
+}
+.cot-exito strong{display:block;color:#fff;margin-bottom:4px}
+.cot-exito span{display:block;color:#ff1744;font-weight:900;font-size:13px}
+.cot-exito p{margin:7px 0 0;color:#aaa;font-size:12px;line-height:1.5}
+@media(max-width:600px){
+    .cot-paso{align-items:flex-start}
+}
+
+
+/* ========================================
+   COTIZADOR - WHATSAPP Y CONSENTIMIENTO
+======================================== */
+#cotizador .campo-ayuda {
+    display: block;
+    margin-top: 7px;
+    color: #777777;
+    font-size: 11px;
+    line-height: 1.45;
+}
+
+#cotizador .consentimiento-cot {
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+    margin-top: 6px;
+    padding: 14px 16px;
+    background: rgba(255, 23, 68, 0.04);
+    border: 1px solid rgba(255, 23, 68, 0.20);
+    border-radius: 10px;
+    color: #aaaaaa;
+    font-size: 12px;
+    line-height: 1.5;
+    cursor: pointer;
+}
+
+#cotizador .consentimiento-cot input {
+    width: 17px;
+    height: 17px;
+    min-width: 17px;
+    margin: 1px 0 0;
+    accent-color: #ff1744;
+    cursor: pointer;
+}
+
+#cotizador .consentimiento-cot span {
+    display: block;
+}
+
+
+/* ========================================
+   SOLICITAR SEPARACIÓN
+======================================== */
+#cotizador .cot-btn-separar {
+    margin-top: 10px;
+    background: transparent;
+    color: #ffffff;
+    border: 1px solid rgba(255, 23, 68, 0.65);
+}
+
+#cotizador .cot-btn-separar:hover {
+    background: rgba(255, 23, 68, 0.10);
+    border-color: #ff1744;
+    box-shadow: 0 8px 24px rgba(255, 23, 68, 0.12);
+}
+
+#cotizador .separacion-ayuda {
+    display: block;
+    margin-top: 10px;
+    color: #777777;
+    font-size: 11px;
+    line-height: 1.5;
+    text-align: center;
+}
+
+#cotizador .cot-btn-deshabilitado {
+    opacity: 0.42;
+    pointer-events: none;
+    filter: grayscale(0.2);
+}

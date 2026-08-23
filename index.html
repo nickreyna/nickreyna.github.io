@@ -223,12 +223,13 @@
 <section id="cotizador" class="cotizador section">
     <div class="cotizador-header">
         <p class="section-label">COTIZA TU EVENTO</p>
-        <h2>Arma tu servicio <span>al instante.</span></h2>
-        <p>Selecciona un plan, agrega los equipos que necesites y obtén un presupuesto referencial.</p>
+        <h2>Tu cotización en <span>3 pasos.</span></h2>
+        <p>Elige tu plan, cuéntame lo esencial y agrega extras solo si los necesitas.</p>
     </div>
 
     <div class="cotizador-grid">
         <form id="cotizador-form" class="cotizador-form">
+            <div class="cot-paso campo-completo"><span>1</span><div><strong>Elige tu plan</strong><small>Empieza por el servicio que mejor encaje con tu evento.</small></div></div>
             <div class="campo campo-completo">
                 <label for="cot-plan">Plan</label>
                 <select id="cot-plan" required>
@@ -238,9 +239,16 @@
                 </select>
             </div>
 
+            <div class="cot-paso campo-completo"><span>2</span><div><strong>Datos del evento</strong><small>Solo lo necesario para preparar tu cotización.</small></div></div>
             <div class="campo">
                 <label for="cot-nombre">Nombre</label>
-                <input id="cot-nombre" type="text" placeholder="Nombre del cliente" required>
+                <input id="cot-nombre" type="text" placeholder="¿Cómo te llamas?" required>
+            </div>
+            <div class="campo">
+                <label for="cot-whatsapp">WhatsApp</label>
+                <input id="cot-whatsapp" type="tel" inputmode="tel" autocomplete="tel"
+                       placeholder="Ej. 969 179 145" maxlength="16" required>
+                <small class="campo-ayuda">Lo usaré únicamente para contactarte sobre esta cotización.</small>
             </div>
             <div class="campo">
                 <label for="cot-fecha">Fecha del evento</label>
@@ -249,8 +257,13 @@
             <div class="campo">
                 <label for="cot-tipo">Tipo de evento</label>
                 <select id="cot-tipo">
-                    <option>Cumpleaños</option><option>Quinceañero</option><option>50 años</option>
-                    <option>Matrimonio</option><option>Corporativo</option><option>Evento privado</option><option>Otro</option>
+                    <option>🎂 Cumpleaños</option>
+                    <option>🎓 Quinceañero</option>
+                    <option>🥂 50 años</option>
+                    <option>💍 Matrimonio</option>
+                    <option>🏢 Corporativo</option>
+                    <option>🎉 Evento privado</option>
+                    <option>✨ Otro</option>
                 </select>
             </div>
             <div class="campo">
@@ -258,22 +271,34 @@
                 <input id="cot-lugar" type="text" placeholder="Distrito / local">
             </div>
 
+            <div class="cot-paso campo-completo"><span>3</span><div><strong>¿Quieres agregar algo?</strong><small>Opcional. Déjalo en 0 si el plan ya tiene todo lo que necesitas.</small></div></div>
             <div class="campo-completo extras-cotizador">
-                <h3>Adicionales</h3>
                 <div class="extra-fila"><span>💡 PAR LED <small>S/20 c/u</small></span><input id="extra-led" type="number" min="0" max="10" value="0" inputmode="numeric"></div>
                 <div class="extra-fila"><span>🔊 Parlante <small>S/60 c/u</small></span><input id="extra-parlante" type="number" min="0" max="10" value="0" inputmode="numeric"></div>
                 <div class="extra-fila"><span>🔴 Láser <small>S/20 c/u</small></span><input id="extra-laser" type="number" min="0" max="10" value="0" inputmode="numeric"></div>
             </div>
+
+            <label class="consentimiento-cot campo-completo">
+                <input id="cot-consentimiento" type="checkbox" required>
+                <span>Acepto que Nick Reyna DJ me contacte por WhatsApp sobre esta cotización.</span>
+            </label>
         </form>
 
         <aside class="resumen-cotizador">
-            <span class="resumen-etiqueta">RESUMEN</span>
+            <span class="resumen-etiqueta">TU RESUMEN</span>
             <h3 id="resumen-plan">Plan Estándar</h3>
             <div id="resumen-detalle" class="resumen-detalle"></div>
             <div class="resumen-total"><span>Total referencial</span><strong id="cot-total">S/380.00</strong></div>
-            <p class="cotizador-nota">Precios válidos para Trujillo y alrededores. Para otras zonas, la movilidad se cotiza según ubicación.</p>
-            <button type="button" id="btn-pdf" class="cot-btn cot-btn-principal">📄 GENERAR COTIZACIÓN</button>
-            <a id="btn-whatsapp-cot" class="cot-btn cot-btn-whatsapp" href="#" target="_blank" rel="noopener noreferrer">💬 ENVIAR POR WHATSAPP</a>
+            <p class="cotizador-nota">La cotización no reserva la fecha. La disponibilidad se confirma directamente con Nick.</p>
+            <button type="button" id="btn-pdf" class="cot-btn cot-btn-principal">📄 GENERAR MI COTIZACIÓN</button>
+            <a id="btn-whatsapp-cot" class="cot-btn cot-btn-whatsapp" href="#" target="_blank" rel="noopener noreferrer">💬 CONSULTAR DISPONIBILIDAD</a>
+            <a id="btn-separar-fecha" class="cot-btn cot-btn-separar" href="#" target="_blank" rel="noopener noreferrer">📅 SOLICITAR SEPARACIÓN</a>
+            <small class="separacion-ayuda">Primero confirmamos disponibilidad. No realices ningún pago hasta recibir confirmación de Nick.</small>
+            <div id="cot-exito" class="cot-exito" hidden>
+                <strong>¡Cotización lista! 🎧</strong>
+                <span id="cot-codigo-visible"></span>
+                <p>Guarda tu cotización y confirma la fecha por WhatsApp.</p>
+            </div>
         </aside>
     </div>
 </section>
