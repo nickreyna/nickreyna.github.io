@@ -1,0 +1,107 @@
+
+*{box-sizing:border-box}
+:root{
+  --bg:#070707;--panel:#101010;--panel2:#151515;--line:#262626;--muted:#8d8d8d;
+  --text:#f5f5f5;--red:#ff1744;--green:#25d366;--blue:#4aa3ff;--amber:#ffb020;
+}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}
+body:before{content:"";position:fixed;inset:0;background:
+radial-gradient(circle at 12% 8%,rgba(255,23,68,.14),transparent 28%),
+radial-gradient(circle at 90% 28%,rgba(255,23,68,.06),transparent 24%);
+pointer-events:none}
+.wrap{width:min(1220px,92%);margin:0 auto;padding:38px 0 70px}
+.card{background:linear-gradient(145deg,#111,#0c0c0c);border:1px solid var(--line);border-radius:18px}
+.brand{font-weight:900;font-size:24px;letter-spacing:-.5px}.brand span,.eyebrow{color:var(--red)}
+.eyebrow{font-size:10px;letter-spacing:2.2px;font-weight:900}
+.muted,.topbar p{color:var(--muted)}
+.login{max-width:460px;margin:7vh auto;padding:34px;box-shadow:0 24px 60px rgba(0,0,0,.35)}
+.login h1{font-size:30px;margin:7px 0}
+label{display:block;color:#aaa;font-size:12px;margin-top:18px}
+input,select{width:100%;margin-top:7px;background:#090909;border:1px solid #333;border-radius:10px;color:#fff;padding:14px;outline:none}
+input:focus,select:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(255,23,68,.08)}
+button,.btn{border:0;border-radius:10px;padding:13px 16px;background:var(--red);color:#fff;font-weight:900;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.login button{width:100%;margin-top:22px}
+.secondary{background:#171717;border:1px solid #333}
+.msg{color:#aaa;text-align:center;font-size:13px}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px;padding:4px 2px}.topbar p{margin:5px 0 0}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}
+.stats article{background:linear-gradient(145deg,#131313,#0d0d0d);border:1px solid var(--line);border-radius:16px;padding:20px;position:relative;overflow:hidden}
+.stats article:after{content:"";position:absolute;right:-30px;top:-30px;width:90px;height:90px;background:rgba(255,23,68,.06);border-radius:50%}
+.stats span{display:block;color:#aaa;font-size:12px}.stats strong{display:block;font-size:29px;margin-top:8px}.stats small{display:block;margin-top:5px;color:#666;font-size:10px}.stats article:last-child strong{color:var(--red)}
+.proximos{padding:18px;margin-bottom:18px}.seccion-titulo{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.seccion-titulo h2{font-size:20px;margin:5px 0 0}.pill{min-width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,23,68,.12);color:var(--red);font-weight:900}
+.proximos-lista{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.prox{background:#0b0b0b;border:1px solid #202020;border-radius:12px;padding:13px}.prox strong{display:block;font-size:13px}.prox span{display:block;color:#888;font-size:11px;margin-top:4px}
+.tools{display:grid;grid-template-columns:1fr 190px 170px;gap:12px;padding:14px;margin-bottom:18px}.tools input,.tools select{margin:0}
+.lista{display:grid;gap:13px}
+.cot{background:linear-gradient(145deg,#121212,#0d0d0d);border:1px solid var(--line);border-radius:18px;padding:20px;display:grid;grid-template-columns:1.25fr .9fr .65fr auto;gap:18px;align-items:center;transition:.25s ease}
+.cot:hover{transform:translateY(-2px);border-color:#373737;box-shadow:0 14px 34px rgba(0,0,0,.2)}
+.codigo{color:var(--red);font-weight:900;font-size:11px;letter-spacing:.4px}.cot h3{margin:5px 0;font-size:19px}.detalle{color:#999;font-size:12px;line-height:1.7}.monto{font-size:22px;font-weight:900}
+.contacto{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.tel{font-size:12px;color:#ddd;background:#191919;border:1px solid #2b2b2b;padding:7px 9px;border-radius:8px}
+.whatsapp-btn{background:var(--green);color:#07120a;padding:8px 10px;border-radius:8px;font-size:11px;font-weight:900;text-decoration:none}
+.no-contacto{font-size:10px;color:#777}
+.estado{display:grid;gap:8px;justify-items:end}.estado select{margin:0;min-width:150px}
+.badge{display:inline-flex;align-items:center;justify-content:center;padding:6px 9px;border-radius:999px;font-size:10px;font-weight:900;border:1px solid transparent}
+.badge-nueva{background:rgba(255,176,32,.1);color:var(--amber);border-color:rgba(255,176,32,.25)}
+.badge-contactado{background:rgba(74,163,255,.1);color:var(--blue);border-color:rgba(74,163,255,.25)}
+.badge-separado{background:rgba(37,211,102,.1);color:var(--green);border-color:rgba(37,211,102,.25)}
+.badge-realizado{background:rgba(255,255,255,.08);color:#ddd;border-color:#333}
+.badge-cancelado{background:rgba(255,23,68,.08);color:#ff6d89;border-color:rgba(255,23,68,.22)}
+.fecha{font-weight:700}.vacio{text-align:center;color:#777;padding:50px 10px}
+@media(max-width:950px){.stats{grid-template-columns:1fr 1fr}.proximos-lista{grid-template-columns:1fr 1fr}.cot{grid-template-columns:1fr 1fr}.estado{justify-items:stretch}.estado select{width:100%}}
+@media(max-width:650px){.wrap{width:min(94%,1220px);padding-top:22px}.topbar{align-items:flex-start}.brand{font-size:20px}.stats{grid-template-columns:1fr 1fr}.proximos-lista{grid-template-columns:1fr}.tools{grid-template-columns:1fr}.cot{grid-template-columns:1fr}.monto{font-size:24px}.estado{justify-items:stretch}.secondary{padding:10px 12px;font-size:11px}}
+
+/* ===== CRM V3 · EXPEDIENTE, PAGOS Y DETALLES ===== */
+.stats{grid-template-columns:repeat(5,1fr)}
+.stat-dinero strong{color:var(--green)!important}
+.ver-ficha{background:#1a1a1a;border:1px solid #343434;color:#fff;padding:8px 10px;border-radius:8px;font-size:11px;font-weight:900;cursor:pointer}
+.ver-ficha:hover{border-color:var(--red);background:#201014}
+.modal[hidden]{display:none}.modal{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;padding:18px}
+.modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.78);backdrop-filter:blur(8px)}
+.ficha{position:relative;z-index:1;width:min(900px,100%);max-height:92vh;overflow:auto;padding:26px;box-shadow:0 30px 100px rgba(0,0,0,.65)}
+.cerrar-ficha{position:absolute;right:16px;top:14px;width:38px;height:38px;border-radius:50%;padding:0;background:#1a1a1a;border:1px solid #333;font-size:24px;font-weight:400}
+.ficha-head{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;padding-right:48px}.ficha-head h2{font-size:27px;margin:5px 0}.ficha-head p{margin:0}
+.ficha-resumen{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:22px 0}
+.ficha-resumen article{background:#090909;border:1px solid #242424;border-radius:13px;padding:15px}
+.ficha-resumen span{display:block;color:#777;font-size:10px}.ficha-resumen strong{display:block;font-size:20px;margin-top:6px}.ficha-resumen small{display:block;margin-top:5px;font-size:9px;font-weight:900}
+.pago-pendiente{color:var(--amber)}.pago-parcial{color:var(--blue)}.pago-pagado{color:var(--green)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.form-grid label{margin:0}.span-2{grid-column:1/-1}
+textarea{width:100%;margin-top:7px;background:#090909;border:1px solid #333;border-radius:10px;color:#fff;padding:14px;outline:none;resize:vertical;font-family:inherit}
+textarea:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(255,23,68,.08)}
+.ficha-contacto{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:18px;padding:13px;background:#0a0a0a;border:1px solid #202020;border-radius:12px}
+.ficha-actions{display:flex;align-items:center;justify-content:flex-end;gap:14px;margin-top:18px}.guardado{font-size:11px;color:var(--green)}
+.cot-acciones{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap}
+.prox{cursor:pointer;transition:.2s ease}.prox:hover{border-color:#383838;transform:translateY(-1px)}
+@media(max-width:1050px){.stats{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:650px){.stats{grid-template-columns:1fr 1fr}.ficha{padding:20px 15px}.ficha-resumen{grid-template-columns:1fr 1fr}.form-grid{grid-template-columns:1fr}.span-2{grid-column:auto}.ficha-head{display:block}.ficha-head .badge{margin-top:10px}.ficha-contacto{align-items:flex-start;flex-direction:column}.ficha-actions{justify-content:space-between}}
+
+/* ===== CRM V4 · CALENDARIO + PAGOS ===== */
+.stats{grid-template-columns:repeat(7,1fr)}
+.stat-cobrado strong{color:var(--blue)!important}.stat-confirmado strong{color:var(--green)!important}
+.calendario{padding:18px;margin-bottom:18px}
+.cal-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:14px}.cal-head h2{margin:5px 0 0;font-size:22px}
+.cal-nav{display:flex;gap:8px}.cal-nav button{min-width:44px;padding:10px 13px}
+.cal-semana,.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}.cal-semana{margin-bottom:8px}.cal-semana span{text-align:center;color:#666;font-size:10px;font-weight:900}
+.cal-dia{min-height:112px;background:#0a0a0a;border:1px solid #202020;border-radius:12px;padding:9px}.cal-dia.otro-mes{opacity:.35}.cal-dia.hoy{border-color:rgba(255,23,68,.55)}
+.cal-num{font-size:11px;font-weight:900;color:#aaa;margin-bottom:7px}.cal-eventos{display:grid;gap:5px}
+.cal-evento{border:0;border-radius:7px;padding:6px 7px;text-align:left;font-size:9px;line-height:1.25;font-weight:800;cursor:pointer;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cal-evento.separado{background:rgba(37,211,102,.12);color:var(--green);border:1px solid rgba(37,211,102,.22)}
+.cal-evento.contactado,.cal-evento.nueva{background:rgba(74,163,255,.10);color:#8dc5ff;border:1px solid rgba(74,163,255,.18)}
+.cal-evento.realizado{background:rgba(255,255,255,.07);color:#bbb;border:1px solid #292929}.cal-evento.cancelado{background:rgba(255,23,68,.08);color:#ff7992;border:1px solid rgba(255,23,68,.18);text-decoration:line-through}
+.pagos-box{margin-top:24px;padding:18px;background:#0a0a0a;border:1px solid #222;border-radius:14px}.pagos-title{margin-bottom:14px}.pagos-title h3{margin:4px 0 0;font-size:18px}
+.pill-money{padding:7px 10px;border-radius:999px;background:rgba(37,211,102,.10);color:var(--green);font-size:11px;font-weight:900;border:1px solid rgba(37,211,102,.2)}
+.pago-form{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;padding:12px;background:#080808;border:1px solid #1f1f1f;border-radius:12px}.pago-form label{margin:0}.pago-form input,.pago-form select{margin-top:6px}
+.pago-actions{display:flex;justify-content:flex-end;align-items:center;gap:12px}.pagos-lista{display:grid;gap:8px;margin-top:12px}
+.pago-row{display:grid;grid-template-columns:110px 110px 1fr 120px auto;gap:10px;align-items:center;padding:11px 12px;border:1px solid #242424;border-radius:10px;background:#0d0d0d}.pago-row.legacy{border-style:dashed;opacity:.8}
+.pago-fecha{font-size:11px;color:#aaa}.pago-metodo{font-size:11px;font-weight:800}.pago-nota{font-size:11px;color:#777}.pago-monto{font-size:14px;font-weight:900;text-align:right}
+.pago-borrar{background:#171717;border:1px solid #333;color:#ff8299;padding:7px 9px;border-radius:8px;font-size:10px}.sin-pagos{color:#666;font-size:11px;padding:12px;text-align:center}
+@media(max-width:1150px){.stats{grid-template-columns:repeat(4,1fr)}}@media(max-width:850px){.cal-dia{min-height:88px;padding:6px}.pago-form{grid-template-columns:1fr 1fr}.pago-row{grid-template-columns:1fr 1fr}.pago-row .pago-nota{grid-column:1/-1}.pago-monto{text-align:left}}
+@media(max-width:650px){.stats{grid-template-columns:1fr 1fr}.calendario{padding:12px}.cal-semana,.cal-grid{gap:4px}.cal-dia{min-height:72px;border-radius:8px}.cal-evento{padding:4px;font-size:7px}.pago-form{grid-template-columns:1fr}.pago-actions{justify-content:space-between}.pago-row{grid-template-columns:1fr}.pago-monto{text-align:left}}
+
+/* V4.1 FIX */
+#btn-guardar-ficha:disabled,#btn-registrar-pago:disabled{opacity:.65;cursor:wait}
+
+/* V4.2 · Agenda rápida simplificada */
+.prox-pendiente{color:var(--amber)!important;font-weight:900}
+.prox-pagado{color:var(--green)!important;font-weight:900}
+.prox strong{line-height:1.35}
