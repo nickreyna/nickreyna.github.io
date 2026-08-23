@@ -5,22 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Nick Reyna DJ | DJ para Eventos en Trujillo y Perú</title>
+    <title>Nick Reyna DJ | DJ para eventos</title>
 
     <link rel="icon" type="image/x-icon" href="logo.ico">
 
-    <meta name="description" content="Nick Reyna DJ, DJ profesional en Trujillo para cumpleaños, quinceañeros, matrimonios, eventos corporativos y privados. Más de 8 años de experiencia y disponibilidad para eventos en todo el Perú."> 
+    <meta
+        name="description"
+        content="Nick Reyna DJ. DJ para cumpleaños, quinceañeros, matrimonios, eventos corporativos y privados. Más de 8 años de experiencia."
+    >
 
     <meta name="author" content="Nick Reyna DJ">
-    
-<link rel="canonical" href="https://nickreyna.com/">
 
-<meta property="og:title" content="Nick Reyna DJ | DJ para Eventos en Trujillo y Perú">
-<meta property="og:description" content="DJ profesional en Trujillo para cumpleaños, quinceañeros, matrimonios, eventos corporativos y privados. Más de 8 años de experiencia y disponibilidad para eventos en todo el Perú.">
-    <meta property="og:url" content="https://nickreyna.com/">
-<meta property="og:type" content="website">
-<meta property="og:image" content="https://nickreyna.com/IMG_0983.jpg">
-    
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -55,11 +50,11 @@
                 </h1>
 
                 <p class="hero-text">
-    DJ profesional para eventos en Trujillo y todo el Perú.
-    Música, energía y más de 8 años de experiencia para hacer de tu evento un recuerdo inolvidable.
-</p>
+                    Música, energía y experiencia para hacer de tu evento
+                    un recuerdo inolvidable.
+                </p>
 
-                <a href="https://wa.me/51969179145?text=Hola%20Nick%2C%20quiero%20cotizar%20un%20servicio%20de%20DJ%20para%20mi%20evento." class="button" target="_blank" rel="noopener noreferrer">
+                <a href="#cotizador" class="button">
     COTIZA TU EVENTO
 </a>
             </div>
@@ -71,10 +66,9 @@
             <span class="subtitulo">SERVICIOS</span>
             <h2>Elige el plan ideal para tu evento</h2>
             <p>
-    La música que tu evento necesita para que todos la pasen increíble.
-    Cumpleaños, quinceañeros, bodas, eventos corporativos o privados,
-    cada celebración tiene su propio estilo y la música se adapta a ella.
-</p>
+                Música para cada momento, con una selección adaptada
+                al estilo de tu celebración.
+            </p>
         </div>
 
         <div class="planes">
@@ -225,6 +219,65 @@
     </div>
 </section>
 
+
+<section id="cotizador" class="cotizador section">
+    <div class="cotizador-header">
+        <p class="section-label">COTIZA TU EVENTO</p>
+        <h2>Arma tu servicio <span>al instante.</span></h2>
+        <p>Selecciona un plan, agrega los equipos que necesites y obtén un presupuesto referencial.</p>
+    </div>
+
+    <div class="cotizador-grid">
+        <form id="cotizador-form" class="cotizador-form">
+            <div class="campo campo-completo">
+                <label for="cot-plan">Plan</label>
+                <select id="cot-plan" required>
+                    <option value="240" data-nombre="Básico">Básico — S/240</option>
+                    <option value="380" data-nombre="Estándar" selected>Estándar — S/380</option>
+                    <option value="500" data-nombre="Plus">Plus — S/500</option>
+                </select>
+            </div>
+
+            <div class="campo">
+                <label for="cot-nombre">Nombre</label>
+                <input id="cot-nombre" type="text" placeholder="Nombre del cliente" required>
+            </div>
+            <div class="campo">
+                <label for="cot-fecha">Fecha del evento</label>
+                <input id="cot-fecha" type="date" required>
+            </div>
+            <div class="campo">
+                <label for="cot-tipo">Tipo de evento</label>
+                <select id="cot-tipo">
+                    <option>Cumpleaños</option><option>Quinceañero</option><option>50 años</option>
+                    <option>Matrimonio</option><option>Corporativo</option><option>Evento privado</option><option>Otro</option>
+                </select>
+            </div>
+            <div class="campo">
+                <label for="cot-lugar">Lugar</label>
+                <input id="cot-lugar" type="text" placeholder="Distrito / local">
+            </div>
+
+            <div class="campo-completo extras-cotizador">
+                <h3>Adicionales</h3>
+                <div class="extra-fila"><span>💡 PAR LED <small>S/20 c/u</small></span><input id="extra-led" type="number" min="0" max="10" value="0" inputmode="numeric"></div>
+                <div class="extra-fila"><span>🔊 Parlante <small>S/60 c/u</small></span><input id="extra-parlante" type="number" min="0" max="10" value="0" inputmode="numeric"></div>
+                <div class="extra-fila"><span>🔴 Láser <small>S/20 c/u</small></span><input id="extra-laser" type="number" min="0" max="10" value="0" inputmode="numeric"></div>
+            </div>
+        </form>
+
+        <aside class="resumen-cotizador">
+            <span class="resumen-etiqueta">RESUMEN</span>
+            <h3 id="resumen-plan">Plan Estándar</h3>
+            <div id="resumen-detalle" class="resumen-detalle"></div>
+            <div class="resumen-total"><span>Total referencial</span><strong id="cot-total">S/380.00</strong></div>
+            <p class="cotizador-nota">Precios válidos para Trujillo y alrededores. Para otras zonas, la movilidad se cotiza según ubicación.</p>
+            <button type="button" id="btn-pdf" class="cot-btn cot-btn-principal">📄 GENERAR COTIZACIÓN</button>
+            <a id="btn-whatsapp-cot" class="cot-btn cot-btn-whatsapp" href="#" target="_blank" rel="noopener noreferrer">💬 ENVIAR POR WHATSAPP</a>
+        </aside>
+    </div>
+</section>
+
 <section class="section">
     <p class="section-label">LO QUE HAGO</p>
 
@@ -330,19 +383,15 @@
             </h2>
 
             <p>
-    Soy Nick Reyna, DJ profesional con más de 8 años de experiencia,
-    especializado en crear experiencias musicales para bodas, quinceañeros,
-    cumpleaños, aniversarios, eventos corporativos, celebraciones privadas
-    y reuniones sociales.
-</p>
+                Soy Nick Reyna, DJ con más de 8 años de experiencia
+                creando experiencias musicales para todo tipo de eventos.
+            </p>
 
             <p>
-    Trabajo principalmente en Trujillo y tengo disponibilidad para eventos
-    en todo el Perú. Mi repertorio incluye reggaetón clásico y actual,
-    salsa, cumbia, merengue, latin house, electrónica, pop, rock y música
-    de los 80, 90 y 2000, adaptando cada presentación al estilo y la energía
-    de cada público.
-</p>
+                Mi objetivo es adaptarme a cada celebración, conectar con
+                el público y mantener la pista activa con una selección
+                musical pensada para cada momento.
+            </p>
 
             <div class="about-stats">
 
