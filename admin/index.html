@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>CRM | Nick Reyna DJ</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <main class="wrap">
+    <section id="login" class="card login">
+      <div class="brand">NICK REYNA <span>DJ</span></div>
+      <p class="eyebrow">CRM PRIVADO</p>
+      <h1>Bienvenido, Nick 🎧</h1>
+      <p class="muted">Inicia sesión para gestionar tus cotizaciones.</p>
+      <form id="login-form">
+        <label>Correo<input id="email" type="email" autocomplete="username" required></label>
+        <label>Contraseña<input id="password" type="password" autocomplete="current-password" required></label>
+        <button type="submit">Entrar al CRM</button>
+      </form>
+      <p id="login-msg" class="msg"></p>
+    </section>
+
+    <section id="crm" hidden>
+      <header class="topbar">
+        <div><div class="brand">NICK REYNA <span>DJ</span></div><p>CRM de cotizaciones</p></div>
+        <button id="logout" class="secondary">Cerrar sesión</button>
+      </header>
+
+      <div class="stats">
+        <article><span>Total</span><strong id="stat-total">0</strong><small>Cotizaciones registradas</small></article>
+        <article><span>Nuevas</span><strong id="stat-nuevas">0</strong><small>Por revisar</small></article>
+        <article><span>Separadas</span><strong id="stat-separadas">0</strong><small>Eventos confirmados</small></article>
+        <article><span>Potencial</span><strong id="stat-potencial">S/0</strong><small>Sin canceladas ni realizadas</small></article>
+        <article class="stat-dinero"><span>Por cobrar</span><strong id="stat-cobrar">S/0</strong><small>Saldo de acuerdos registrados</small></article>
+<article class="stat-cobrado"><span>Cobrado</span><strong id="stat-cobrado">S/0</strong><small>Pagos registrados</small></article>
+<article class="stat-confirmado"><span>Confirmado</span><strong id="stat-confirmado">S/0</strong><small>Eventos separados</small></article>
+      </div>
+
+      <section class="proximos card">
+        <div class="seccion-titulo">
+          <div>
+            <span class="eyebrow">AGENDA RÁPIDA</span>
+            <h2>Próximos eventos</h2>
+          </div>
+          <span id="proximos-count" class="pill">0</span>
+        </div>
+        <div id="proximos-lista" class="proximos-lista"></div>
+      </section>
+
+
+      <section class="calendario card">
+        <div class="cal-head">
+          <div><span class="eyebrow">CALENDARIO</span><h2 id="cal-titulo">Mes</h2></div>
+          <div class="cal-nav">
+            <button id="cal-prev" class="secondary" type="button">‹</button>
+            <button id="cal-hoy" class="secondary" type="button">Hoy</button>
+            <button id="cal-next" class="secondary" type="button">›</button>
+          </div>
+        </div>
+        <div class="cal-semana"><span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span><span>Dom</span></div>
+        <div id="cal-grid" class="cal-grid"></div>
+      </section>
+
+      <div class="tools card">
+        <input id="buscar" type="search" placeholder="🔎 Buscar cliente, código, evento, lugar o WhatsApp...">
+        <select id="filtro">
+          <option value="">Todos los estados</option>
+          <option>Nueva</option><option>Contactado</option><option>Separado</option>
+          <option>Realizado</option><option>Cancelado</option>
+        </select>
+        <select id="filtro-plan">
+          <option value="">Todos los planes</option>
+          <option>Básico</option><option>Estándar</option><option>Plus</option>
+        </select>
+      </div>
+
+      <div id="lista" class="lista"></div>
+      <p id="crm-msg" class="msg"></p>
+    </section>
+
+    <div id="ficha-modal" class="modal" hidden>
+      <div class="modal-backdrop" data-cerrar="1"></div>
+      <section class="ficha card" role="dialog" aria-modal="true" aria-labelledby="ficha-titulo">
+        <button id="cerrar-ficha" class="cerrar-ficha" aria-label="Cerrar">×</button>
+        <div class="ficha-head">
+          <div>
+            <span class="eyebrow">EXPEDIENTE DEL EVENTO</span>
+            <h2 id="ficha-titulo">Cliente</h2>
+            <p id="ficha-subtitulo" class="muted"></p>
+          </div>
+          <span id="ficha-estado" class="badge"></span>
+        </div>
+
+        <div class="ficha-resumen">
+          <article><span>Cotizado</span><strong id="ficha-cotizado">S/0</strong></article>
+          <article><span>Precio acordado</span><strong id="ficha-acordado-vista">—</strong></article>
+          <article><span>Adelanto</span><strong id="ficha-adelanto-vista">S/0</strong></article>
+          <article><span>Saldo</span><strong id="ficha-saldo">—</strong><small id="ficha-pago-badge"></small></article>
+        </div>
+
+        <form id="ficha-form">
+          <div class="form-grid">
+            <label>Hora del evento<input id="ficha-hora" type="time"></label>
+            <label>Dirección exacta<input id="ficha-direccion" type="text" placeholder="Local, calle, referencia..."></label>
+            <label>Precio acordado (S/)<input id="ficha-precio" type="number" min="0" step="0.01" placeholder="Ej. 420"></label>
+            <label>Adelanto previo (legacy)<input id="ficha-adelanto" type="number" min="0" step="0.01" value="0" readonly title="Los nuevos pagos se registran abajo"></label>
+            <label class="span-2">Notas privadas<textarea id="ficha-notas" rows="5" placeholder="Playlist, indicaciones, coordinaciones, detalles importantes..."></textarea></label>
+            <label class="span-2">Última gestión<textarea id="ficha-gestion" rows="3" placeholder="Ej. Confirmó el plan, dejó adelanto y falta coordinar hora..."></textarea></label>
+          </div>
+
+          <section class="pagos-box">
+            <div class="seccion-titulo pagos-title">
+              <div><span class="eyebrow">PAGOS</span><h3>Historial de pagos</h3></div>
+              <span id="pagos-total-pill" class="pill-money">S/0</span>
+            </div>
+            <div id="pago-form" class="pago-form">
+              <label>Monto (S/)<input id="pago-monto" type="number" min="0.01" step="0.01" placeholder="Ej. 100" required></label>
+              <label>Método
+                <select id="pago-metodo" required>
+                  <option value="">Selecciona</option><option>Yape</option><option>Plin</option><option>Transferencia</option><option>Efectivo</option><option>Otro</option>
+                </select>
+              </label>
+              <label>Fecha<input id="pago-fecha" type="date" required></label>
+              <label class="span-2">Nota<input id="pago-nota" type="text" placeholder="Ej. Adelanto para separar fecha"></label>
+              <div class="span-2 pago-actions"><span id="pago-msg" class="guardado"></span><button type="button" id="btn-registrar-pago">➕ Registrar pago</button></div>
+            </div>
+            <div id="pagos-lista" class="pagos-lista"></div>
+          </section>
+
+          <div class="ficha-contacto">
+            <div id="ficha-whatsapp" class="detalle"></div>
+            <a id="ficha-wa-btn" class="whatsapp-btn" target="_blank" rel="noopener noreferrer" hidden>💬 WhatsApp</a>
+          </div>
+          <div class="ficha-actions">
+            <span id="ficha-guardado" class="guardado"></span>
+            <button type="submit" id="btn-guardar-ficha">💾 Guardar ficha</button>
+          </div>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <script src="admin.js"></script>
+</body>
+</html>
