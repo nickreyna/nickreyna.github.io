@@ -155,8 +155,7 @@
                     <li> TODOS LOS GENEROS MUSICALES</li>
                     <li> 2 MICRÓFONOS</li>
                     <li> 2 PARLANTES JBL EON 615</li>
-                    <li> 2 PAR LEDS</li>
-                    <li> MOVILIDAD INCLUIDA</li>
+<li> PAQUETE DE ILUMINACIÓN: 4 PAR LED + 1 EFECTO DERBY</li>                    <li> MOVILIDAD INCLUIDA</li>
                 </ul>
 
                 <a
@@ -184,36 +183,28 @@
 
         <!-- SERVICIOS ADICIONALES -->
         <div class="adicionales">
-
+            <span class="adicionales-kicker">ADICIONALES</span>
             <h3>Potencia tu evento</h3>
+            <p>Agrega equipos adicionales según las necesidades de tu celebración.</p>
 
-            <p>
-                Agrega equipos adicionales según las necesidades
-                de tu celebración.
-            </p>
-
-            <div class="adicionales-grid">
-
-                <div class="adicional">
-                    <span>💡</span>
-                    <h4>PAR LED</h4>
-                    <strong>S/20</strong>
+            <div class="adicionales-grid adicionales-grid-visual">
+                <div class="adicional adicional-visual">
+                    <span class="adicional-icono">💡</span>
+                    <div><h4>PAR LED</h4><p>Iluminación RGB adicional.</p><strong>S/20 <small>c/u</small></strong></div>
                 </div>
-
-                <div class="adicional">
-                    <span>🔊</span>
-                    <h4>Parlante</h4>
-                    <strong>S/60</strong>
+                <div class="adicional adicional-visual">
+                    <span class="adicional-icono">🔊</span>
+                    <div><h4>Parlante JBL EON 615</h4><p>Más potencia y claridad para tu evento.</p><strong>S/60 <small>c/u</small></strong></div>
                 </div>
-
-                <div class="adicional">
-                    <span>🔴</span>
-                    <h4>Láser</h4>
-                    <strong>S/20</strong>
+                <div class="adicional adicional-visual">
+                    <span class="adicional-icono">🔴</span>
+                    <div><h4>Láser</h4><p>Efecto láser básico para dar color.</p><strong>S/20</strong></div>
                 </div>
-
+                <div class="adicional adicional-visual">
+                    <span class="adicional-icono">🫧</span>
+                    <div><h4>Máquina de Burbujas</h4><p>Burbujas para momentos especiales.</p><strong>S/25</strong></div>
+                </div>
             </div>
-
         </div>
 
     </div>
@@ -272,10 +263,27 @@
             </div>
 
             <div class="cot-paso campo-completo"><span>3</span><div><strong>¿Quieres agregar algo?</strong><small>Opcional. Déjalo en 0 si el plan ya tiene todo lo que necesitas.</small></div></div>
-            <div class="campo-completo extras-cotizador">
-                <div class="extra-fila"><span>💡 PAR LED <small>S/20 c/u</small></span><input id="extra-led" type="number" min="0" max="10" value="0" inputmode="numeric"></div>
-                <div class="extra-fila"><span>🔊 Parlante <small>S/60 c/u</small></span><input id="extra-parlante" type="number" min="0" max="10" value="0" inputmode="numeric"></div>
-                <div class="extra-fila"><span>🔴 Láser <small>S/20 c/u</small></span><input id="extra-laser" type="number" min="0" max="10" value="0" inputmode="numeric"></div>
+            <div class="campo-completo extras-cotizador extras-cards">
+                <article class="extra-card">
+                    <span class="extra-card-icono">💡</span><div class="extra-card-body"><span class="extra-tope">MÁX. 2</span><h3>PAR LED</h3><p>Iluminación RGB adicional.</p><strong>S/20 <small>c/u</small></strong>
+                        <div class="extra-control"><button type="button" class="extra-menos" data-target="extra-led">−</button><input id="extra-led" type="number" min="0" max="2" value="0" readonly><button type="button" class="extra-mas" data-target="extra-led">+</button></div>
+                    </div>
+                </article>
+                <article class="extra-card">
+                    <span class="extra-card-icono">🔊</span><div class="extra-card-body"><span class="extra-tope">MÁX. 2</span><h3>Parlante JBL EON 615</h3><p>Parlante adicional al paquete.</p><strong>S/60 <small>c/u</small></strong>
+                        <div class="extra-control"><button type="button" class="extra-menos" data-target="extra-parlante">−</button><input id="extra-parlante" type="number" min="0" max="2" value="0" readonly><button type="button" class="extra-mas" data-target="extra-parlante">+</button></div>
+                    </div>
+                </article>
+                <article class="extra-card">
+                    <span class="extra-card-icono">🔴</span><div class="extra-card-body"><span class="extra-tope">MÁX. 1</span><h3>Láser</h3><p>Efecto láser básico.</p><strong>S/20</strong>
+                        <div class="extra-control"><button type="button" class="extra-menos" data-target="extra-laser">−</button><input id="extra-laser" type="number" min="0" max="1" value="0" readonly><button type="button" class="extra-mas" data-target="extra-laser">+</button></div>
+                    </div>
+                </article>
+                <article class="extra-card">
+                    <span class="extra-card-icono">🫧</span><div class="extra-card-body"><span class="extra-tope">MÁX. 1</span><h3>Máquina de Burbujas</h3><p>Burbujas para momentos especiales.</p><strong>S/25</strong>
+                        <div class="extra-control"><button type="button" class="extra-menos" data-target="extra-burbujas">−</button><input id="extra-burbujas" type="number" min="0" max="1" value="0" readonly><button type="button" class="extra-mas" data-target="extra-burbujas">+</button></div>
+                    </div>
+                </article>
             </div>
 
             <label class="consentimiento-cot campo-completo">
@@ -348,6 +356,45 @@
             </div>
         </section>
 
+
+        <section id="colaboradores" class="colaboradores section">
+            <div class="colab-header">
+                <p class="section-label">SERVICIOS PARA TU EVENTO</p>
+                <h2>Decoración de <span>eventos.</span></h2>
+                <p>Detalles que hacen la diferencia. Trabajamos junto a profesionales de confianza para ayudarte a completar tu celebración.</p>
+            </div>
+
+            <article class="colab-destacado">
+                <span class="colab-badge">★ COLABORADOR RECOMENDADO</span>
+                <div class="colab-grid">
+                    <div class="colab-info">
+                        <div class="colab-logo-wrap">
+                            <img src="encanto-festivo.png" alt="Encanto Festivo By Angie" class="colab-logo">
+                        </div>
+                        <h3>Creamos momentos <span>que encantan.</span></h3>
+                        <p>Diseños personalizados para cumpleaños, celebraciones infantiles, eventos especiales y ocasiones corporativas.</p>
+                        <p>Cada montaje se adapta a la temática y estilo de tu evento para crear un espacio único y memorable.</p>
+                        <div class="colab-features">
+                            <span>🎉 Decoración temática</span><span>🎨 Diseños personalizados</span><span>📸 Montajes memorables</span>
+                        </div>
+                    </div>
+
+                    <div class="colab-galeria">
+                        <figure class="colab-foto colab-foto-principal"><img src="encanto-corporativo.jpg" alt="Decoración corporativa de Encanto Festivo" loading="lazy"><figcaption>Eventos corporativos</figcaption></figure>
+                        <div class="colab-miniaturas">
+                            <figure class="colab-foto"><img src="encanto-kpop.jpg" alt="Decoración temática K-pop" loading="lazy"><figcaption>Temáticas</figcaption></figure>
+                            <figure class="colab-foto"><img src="encanto-pooh.jpg" alt="Decoración infantil Winnie the Pooh" loading="lazy"><figcaption>Infantiles</figcaption></figure>
+                            <figure class="colab-foto"><img src="encanto-babyshark.jpg" alt="Decoración temática Baby Shark" loading="lazy"><figcaption>Cumpleaños</figcaption></figure>
+                        </div>
+                    </div>
+                </div>
+                <div class="colab-acciones">
+                    <a href="https://www.instagram.com/encantofestivobyangie?igsi=MXFyNmE1bWpuaXl6YQ==" target="_blank" rel="noopener noreferrer" class="colab-btn colab-btn-secundario">📷 VER TRABAJOS</a>
+                    <a href="https://api.whatsapp.com/send/?phone=51932829699&text=Hola%20Angie%20%F0%9F%91%8B%2C%20vi%20tu%20trabajo%20de%20Encanto%20Festivo%20en%20la%20web%20de%20Nick%20Reyna%20DJ%20y%20quisiera%20informaci%C3%B3n%20sobre%20decoraci%C3%B3n%20para%20mi%20evento.%20%F0%9F%8E%88" target="_blank" rel="noopener noreferrer" class="colab-btn colab-btn-principal">💬 CONSULTAR DECORACIÓN</a>
+                </div>
+                <p class="colab-aviso">ⓘ Servicio brindado por colaborador independiente.</p>
+            </article>
+        </section>
 
         <section id="en-accion" class="accion section">
 

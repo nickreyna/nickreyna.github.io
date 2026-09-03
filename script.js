@@ -106,6 +106,7 @@ const cotLugar = document.getElementById('cot-lugar');
 const extraLed = document.getElementById('extra-led');
 const extraParlante = document.getElementById('extra-parlante');
 const extraLaser = document.getElementById('extra-laser');
+const extraBurbujas = document.getElementById('extra-burbujas');
 
 let codigoCotizacionActual = '';
 
@@ -130,11 +131,12 @@ function datosCotizacion() {
     const opt = cotPlan.options[cotPlan.selectedIndex];
     const plan = opt.dataset.nombre;
     const base = Number(cotPlan.value);
-    const led = Math.max(0, Number(extraLed.value) || 0);
-    const parlante = Math.max(0, Number(extraParlante.value) || 0);
-    const laser = Math.max(0, Number(extraLaser.value) || 0);
-    const total = base + led * 20 + parlante * 60 + laser * 20;
-    return { plan, base, led, parlante, laser, total };
+    const laser = Math.min(1, Math.max(0, Number(extraLaser.value) || 0));
+    const burbujas = Math.min(1, Math.max(0, Number(extraBurbujas.value) || 0));
+    const led = Math.min(2, Math.max(0, Number(extraLed.value) || 0));
+    const parlante = Math.min(2, Math.max(0, Number(extraParlante.value) || 0));
+    const total = base + led * 20 + parlante * 60 + laser * 20 + burbujas * 25;
+    return { plan, base, led, parlante, laser, burbujas, total };
 }
 
 
@@ -155,8 +157,9 @@ function actualizarCotizador() {
 
     const filas = [`<div class="resumen-linea"><span>Plan ${d.plan}</span><strong>S/${d.base.toFixed(2)}</strong></div>`];
     if (d.led) filas.push(`<div class="resumen-linea"><span>${d.led} × PAR LED</span><strong>S/${(d.led*20).toFixed(2)}</strong></div>`);
-    if (d.parlante) filas.push(`<div class="resumen-linea"><span>${d.parlante} × Parlante</span><strong>S/${(d.parlante*60).toFixed(2)}</strong></div>`);
+    if (d.parlante) filas.push(`<div class="resumen-linea"><span>${d.parlante} × JBL EON 615</span><strong>S/${(d.parlante*60).toFixed(2)}</strong></div>`);
     if (d.laser) filas.push(`<div class="resumen-linea"><span>${d.laser} × Láser</span><strong>S/${(d.laser*20).toFixed(2)}</strong></div>`);
+    if (d.burbujas) filas.push(`<div class="resumen-linea"><span>Máquina de Burbujas</span><strong>S/${(d.burbujas*25).toFixed(2)}</strong></div>`);
     document.getElementById('resumen-detalle').innerHTML = filas.join('');
 
     const codigo = obtenerCodigoCotizacion();
@@ -171,8 +174,9 @@ function actualizarCotizador() {
 📍 Lugar: ${cotLugar.value || 'Por confirmar'}
 🎧 Plan: ${d.plan} (S/${d.base})
 💡 PAR LED: ${d.led}
-🔊 Parlantes adicionales: ${d.parlante}
+🔊 JBL EON 615 adicionales: ${d.parlante}
 🔴 Láser: ${d.laser}
+🫧 Máquina de Burbujas: ${d.burbujas}
 
 💰 Total referencial: S/${d.total.toFixed(2)}
 
@@ -203,7 +207,7 @@ Quisiera confirmar disponibilidad.`;
     btnSeparar.tabIndex = listo ? 0 : -1;
 }
 
-[cotPlan, cotNombre, cotWhatsapp, cotFecha, cotTipo, cotLugar, extraLed, extraParlante, extraLaser].forEach(el => {
+[cotPlan, cotNombre, cotWhatsapp, cotFecha, cotTipo, cotLugar, extraLed, extraParlante, extraLaser, extraBurbujas].forEach(el => {
     if (el) el.addEventListener('input', actualizarCotizador);
 });
 if (cotConsentimiento) cotConsentimiento.addEventListener('change', actualizarCotizador);
@@ -239,15 +243,15 @@ document.getElementById('btn-pdf')?.addEventListener('click', async () => {
     const fechaEvento = new Date(cotFecha.value + 'T00:00:00').toLocaleDateString('es-PE');
     const adicionales = [
         d.led ? `${d.led} × PAR LED — S/${(d.led*20).toFixed(2)}` : '',
-        d.parlante ? `${d.parlante} × Parlante — S/${(d.parlante*60).toFixed(2)}` : '',
-        d.laser ? `${d.laser} × Láser — S/${(d.laser*20).toFixed(2)}` : ''
+        d.parlante ? `${d.parlante} × JBL EON 615 — S/${(d.parlante*60).toFixed(2)}` : '',
+        d.laser ? `${d.laser} × Láser — S/${(d.laser*20).toFixed(2)}` : '',
+        d.burbujas ? `1 × Máquina de Burbujas — S/${(d.burbujas*25).toFixed(2)}` : ''
     ].filter(Boolean);
     const numero = obtenerCodigoCotizacion();
     const inclusionesPlan = {
         "Básico": ["3 horas de show", "DJ profesional", "Todos los géneros musicales", "1 micrófono", "Movilidad incluida"],
         "Estándar": ["5 horas de show", "DJ profesional", "1 parlante JBL EON 615", "Todos los géneros musicales", "1 micrófono", "Movilidad incluida"],
-        "Plus": ["5 horas de show", "DJ profesional", "Todos los géneros musicales", "2 micrófonos", "2 parlantes JBL EON 615", "2 PAR LED", "Movilidad incluida"]
-    };
+"Plus": ["5 horas de show", "DJ profesional", "Todos los géneros musicales", "2 micrófonos", "2 parlantes JBL EON 615", "Paquete de iluminación: 4 PAR LED + 1 efecto Derby", "Movilidad incluida"]    };
 
     const igv = d.total / 1.18 * 0.18;
     const valorVenta = d.total - igv;
@@ -365,3 +369,17 @@ table{width:100%;border-collapse:collapse;font-size:13px}td{padding:11px 4px;bor
 
 
 actualizarCotizador();
+
+// CONTROLES + / - DE AGREGADOS
+document.querySelectorAll('.extra-mas, .extra-menos').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const input = document.getElementById(btn.dataset.target);
+        if (!input) return;
+        const min = Number(input.min || 0);
+        const max = Number(input.max || 99);
+        let valor = Number(input.value || 0);
+        valor += btn.classList.contains('extra-mas') ? 1 : -1;
+        input.value = Math.max(min, Math.min(max, valor));
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+});
