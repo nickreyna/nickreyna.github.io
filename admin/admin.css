@@ -148,3 +148,39 @@ textarea:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(255,23,68,.08)}
 .nueva-ficha .n-resumen>div{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:12px;border-top:1px solid #333}
 .nueva-ficha .n-resumen>div strong{font-size:25px;color:#ff1744}.nueva-ficha .n-resumen small{color:#aaa}
 @media(max-width:650px){.nueva-ficha .equipo-grid{grid-template-columns:1fr}.nueva-ficha .cot-paso{padding:12px}.nueva-ficha .n-resumen>div strong{font-size:22px}}
+
+
+/* V8: identidad visual del cotizador PÚBLICO, aplicada solo al modal privado */
+#nueva-modal .modal-backdrop{background:rgba(0,0,0,.88);backdrop-filter:blur(9px)}
+#nueva-modal .nueva-ficha{background:radial-gradient(circle at 50% 0%,rgba(255,23,68,.12),transparent 43%),#080808;border:1px solid rgba(255,23,68,.52);border-radius:20px;box-shadow:0 35px 110px rgba(0,0,0,.82),0 0 42px rgba(255,23,68,.075);padding:30px 32px;width:min(940px,100%);max-width:940px;color:#fff}
+#nueva-modal .nueva-ficha .eyebrow{color:#ff1744;font-size:12px;letter-spacing:3.2px}
+#nueva-modal #nueva-titulo{font-size:clamp(30px,4vw,44px);letter-spacing:-1.7px;font-weight:900;line-height:1.1;margin:11px 0 12px;color:#fff}
+#nueva-modal #nueva-titulo:after{content:'';display:block;width:66px;height:4px;border-radius:8px;background:#ff1744;margin-top:16px}
+#nueva-modal .nueva-ficha>.muted{color:#aaa;font-size:14px;line-height:1.6;margin-bottom:24px}
+#nueva-modal #nueva-form>.form-grid{background:#0e0e0e;border:1px solid #292929;border-radius:18px;padding:23px;gap:20px}
+#nueva-modal #nueva-form label{font-weight:800;font-size:13px;letter-spacing:.25px;color:#eee;margin:0}
+#nueva-modal #nueva-form input,#nueva-modal #nueva-form select,#nueva-modal #nueva-form textarea{background:#151515;color:#fff;border:1px solid #353535;border-radius:9px;padding:14px 13px;font:inherit;font-weight:500}
+#nueva-modal #nueva-form input:focus,#nueva-modal #nueva-form select:focus,#nueva-modal #nueva-form textarea:focus{border-color:#ff1744;box-shadow:0 0 0 3px rgba(255,23,68,.13)}
+#nueva-modal .cot-paso{background:transparent!important;border:0!important;border-bottom:1px solid rgba(255,23,68,.5)!important;border-radius:0!important;margin:15px 0 3px!important;padding:14px 2px 17px!important}
+#nueva-modal .cot-paso>span{width:39px;height:39px;box-shadow:0 0 20px rgba(255,23,68,.25)}
+#nueva-modal .cot-paso strong{font-size:19px!important;letter-spacing:-.4px}
+#nueva-modal .cot-paso small{color:#aaa!important}
+#nueva-modal #n-equipo-box{background:#101010;padding:18px;border:1px solid rgba(255,23,68,.30);border-radius:15px}
+#nueva-modal #n-equipo-box>strong{font-size:17px;color:#ff1744}
+#nueva-modal .equipo-grid{gap:13px!important}
+#nueva-modal .equipo-fila{background:radial-gradient(circle at 50% 0%,rgba(255,23,68,.095),transparent 72%),#0d0d0d!important;border:1px solid #343434!important;border-radius:15px!important;padding:19px!important;transition:border-color .15s,box-shadow .15s}
+#nueva-modal .equipo-fila:focus-within{border-color:#ff1744!important;box-shadow:0 0 0 2px rgba(255,23,68,.10)}
+#nueva-modal .equipo-titulo{font-size:15px!important;color:#fff}
+#nueva-modal .equipo-fila small{color:#ff718b!important;font-weight:700;letter-spacing:.2px}
+#nueva-modal .equipo-control{border:1px solid #555;background:#151515}
+#nueva-modal .equipo-control button{background:#ff1744;color:#fff;font-size:19px;padding:7px 12px}
+#nueva-modal .equipo-control button:hover{background:#cf1036}
+#nueva-modal .equipo-control select{background:#151515!important;border:0!important;border-radius:0!important;padding:9px!important;font-weight:900!important}
+#nueva-modal .n-resumen{background:linear-gradient(145deg,#161616,#0b0b0b)!important;border:1px solid rgba(255,23,68,.6)!important;box-shadow:0 20px 40px rgba(0,0,0,.25);padding:22px!important}
+#nueva-modal .n-resumen>strong{color:#ff1744;font-size:12px!important;font-weight:900;letter-spacing:2px;text-transform:uppercase}
+#nueva-modal .n-resumen>div strong{font-size:32px!important;color:#ff1744}
+#nueva-modal #guardar-nueva,#nueva-modal #nueva-pdf-compartir{background:#ff1744;color:#fff;border-radius:9px;padding:15px 24px}
+#nueva-modal .picker-button{background:#211319;border:1px solid #713242;color:#fff}
+#nueva-modal .picker-button:hover{background:#3a1723}
+#nueva-modal .nueva-exito{border-top:1px solid #2d2d2d;margin-top:20px}
+@media(max-width:650px){#nueva-modal .nueva-ficha{padding:20px 14px;border-radius:15px}#nueva-modal #nueva-form>.form-grid{padding:15px 12px;gap:16px}#nueva-modal .cot-paso strong{font-size:16px!important}#nueva-modal .equipo-grid{grid-template-columns:1fr!important}#nueva-modal .n-resumen>div strong{font-size:27px!important}}
