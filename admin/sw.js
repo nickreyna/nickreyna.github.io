@@ -1,6 +1,6 @@
 // Cache only public application shell. NEVER cache Supabase/auth/API responses.
-const CACHE = 'nick-crm-shell-v2';
-const ASSETS = ['./admin.css','./admin.js','./manifest.webmanifest','./icons/icon-192.png','./icons/icon-512.png','./icons/icon-512-maskable.png','./icons/apple-touch-icon.png'];
+const CACHE = 'nick-crm-shell-v3';
+const ASSETS = ['./admin.css','./admin.js','./cotizador-pdf.js','./icons/logo-pdf.jpg','./manifest.webmanifest','./icons/icon-192.png','./icons/icon-512.png','./icons/icon-512-maskable.png','./icons/apple-touch-icon.png'];
 self.addEventListener('install', event => {
  event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS)).then(()=>self.skipWaiting()));
 });

@@ -114,3 +114,11 @@ textarea:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(255,23,68,.08)}
 .nueva-exito[hidden]{display:none}
 .nueva-exito p{color:var(--green);font-weight:800;width:100%;margin:0}
 @media(max-width:650px){.crm-acciones button{width:100%}.nueva-ficha{max-height:94dvh}.nueva-ficha .ficha-actions{flex-direction:column;align-items:stretch}.nueva-ficha .ficha-actions button{width:100%}}
+
+/* Cotizador personalizado / PDF */
+.equipo-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:12px 0}
+.equipo-fila{display:flex;align-items:center;justify-content:space-between;gap:8px;background:#0a0a0a;border:1px solid #292929;padding:10px;border-radius:12px;color:#eee;font-size:12px}
+.equipo-fila select{width:82px;min-width:82px;margin:0;padding:10px}
+.pdf-acciones{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}
+.nueva-exito{padding:14px 0}.nueva-ficha{max-height:94dvh;overflow:auto}
+@media(max-width:650px){.equipo-grid{grid-template-columns:1fr}.pdf-acciones button{flex:1}}

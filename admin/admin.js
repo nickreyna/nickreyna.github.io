@@ -297,6 +297,7 @@ function abrirNuevaCotizacion(){
   $("nueva-exito").hidden=true;
   $("nueva-msg").textContent="";
   $("n-fecha").min=isoHoy();
+  if(window.resetearCotizadorExtra)window.resetearCotizadorExtra();
   cotizacionModal.hidden=false;
   document.body.style.overflow="hidden";
   $("n-cliente").focus();
@@ -321,7 +322,12 @@ $("nueva-form").addEventListener("submit",async e=>{
   if(!/^51\d{9}$/.test(telefono)){msg.textContent="Ingresa un celular peruano válido.";return;}
   if(!Number.isFinite(total)||total<0){msg.textContent="Revisa el precio.";return;}
   const codigo=`NR-M-${new Date().toISOString().slice(2,10).replace(/-/g,"")}-${Math.random().toString(36).slice(2,8).toUpperCase()}`;
+  const detalles=window.obtenerDetallesCotizacion?.()||{};
+  const notas=[detalles.equipoTexto?`Equipos: ${detalles.equipoTexto}`:"",detalles.descripcion?`Detalles: ${detalles.descripcion}`:"",detalles.duracion?`Duración: ${detalles.duracion} horas`:""].filter(Boolean).join("\n");
   const payload={codigo,cliente,whatsapp:raw.trim(),tipo_evento:$("n-evento").value.trim(),fecha_evento:fecha,lugar:$("n-lugar").value.trim(),plan,total,estado:$("n-estado").value,acepta_contacto:true};
+  if(notas)payload.notas=notas;
+  if(detalles.hora)payload.hora_evento=detalles.hora;
+
   boton.disabled=true;msg.textContent="Guardando...";
   try{
     const r=await fetch(API,{method:"POST",headers:headers({"Content-Type":"application/json","Prefer":"return=representation"}),body:JSON.stringify(payload)});
@@ -330,7 +336,8 @@ $("nueva-form").addEventListener("submit",async e=>{
     if(!Array.isArray(inserted)||!inserted[0])throw new Error("Guardado sin respuesta. Actualiza el listado antes de reintentar.");
     const c=inserted[0];
     cotizaciones.unshift(c);pintar();
-    const texto=`Hola ${cliente}, soy Nick Reyna DJ 🎧. Te comparto tu cotización ${codigo} para ${payload.tipo_evento} del ${fecha}: plan ${plan}, total S/${total.toFixed(2)}. Si deseas confirmar la fecha, coordinamos el adelanto. ¡Gracias!`;
+    const texto=`Hola ${cliente}, soy Nick Reyna DJ 🎧. Te comparto la cotización ${codigo} para ${payload.tipo_evento} del ${fecha}. Plan: ${plan}. ${detalles.equipoTexto?"Incluye: "+detalles.equipoTexto+". ":""}Total: S/${total.toFixed(2)}. Adelanto para reservar (50%): S/${(total/2).toFixed(2)}. ¡Gracias!`;
+    if(window.guardarUltimaCotizacion)window.guardarUltimaCotizacion({...payload,...detalles});
     $("nueva-whatsapp-link").href=`https://wa.me/${telefono}?text=${encodeURIComponent(texto)}`;
     $("nueva-form").hidden=true;$("nueva-exito").hidden=false;msg.textContent="";
   }catch(err){msg.textContent=err.message;}

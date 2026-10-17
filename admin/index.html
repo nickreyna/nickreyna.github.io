@@ -103,13 +103,21 @@
             <label>Fecha del evento *<input id="n-fecha" type="date" required></label>
             <label>Lugar / distrito<input id="n-lugar" maxlength="180" placeholder="Trujillo, Huanchaco..."></label>
             <label>Plan *<select id="n-plan" required><option value="">Selecciona un plan</option><option value="Básico">Básico · S/240</option><option value="Estándar">Estándar · S/380</option><option value="Plus">Plus · S/500</option><option value="Personalizado">Personalizado</option></select></label>
+            <label>Hora de inicio<input id="n-hora" type="time"></label>
+            <label>Duración del servicio (horas)<input id="n-horas" type="number" min="1" max="24" step="0.5" value="5"></label>
+            <div class="span-2" id="n-equipo-box" hidden>
+              <strong>Equipos y servicios personalizados</strong>
+              <p class="muted" style="font-size:12px">Solo selecciona cantidades. Tú decides el precio final.</p>
+              <div id="n-equipo-grid" class="equipo-grid"></div>
+            </div>
+            <label class="span-2">Detalle adicional / indicaciones<textarea id="n-descripcion" rows="2" placeholder="Por ejemplo, música para ceremonia, traslado especial..."></textarea></label>
             <label>Precio cotizado (S/) *<input id="n-total" type="number" min="0" step="0.01" required placeholder="380.00"></label>
             <label>Estado<select id="n-estado"><option value="Nueva">Nueva</option><option value="Contactado">Contactado</option><option value="Separado">Separado</option></select></label>
           </div>
           <p class="muted" style="font-size:12px">El precio puede editarse para adicionales o acuerdos especiales. No registra pagos automáticamente.</p>
           <div class="ficha-actions"><span id="nueva-msg" class="guardado" role="status"></span><button id="guardar-nueva" type="submit">Guardar cotización</button></div>
         </form>
-        <div id="nueva-exito" hidden class="nueva-exito"><p>✓ Cotización guardada.</p><a id="nueva-whatsapp-link" class="whatsapp-btn" target="_blank" rel="noopener noreferrer">💬 Compartir por WhatsApp</a><button type="button" class="secondary" id="nueva-otra">Crear otra</button></div>
+        <div id="nueva-exito" hidden class="nueva-exito"><p>✓ Cotización guardada.</p><div class="pdf-acciones"><button type="button" id="nueva-pdf-compartir">📲 Compartir PDF</button><button type="button" id="nueva-pdf-descargar" class="secondary">⬇ Descargar PDF</button></div><p id="nueva-pdf-msg" class="muted" role="status"></p><a id="nueva-whatsapp-link" class="whatsapp-btn" target="_blank" rel="noopener noreferrer">💬 Compartir por WhatsApp</a><button type="button" class="secondary" id="nueva-otra">Crear otra</button></div>
       </section>
     </div>
 
@@ -176,6 +184,7 @@
   </main>
 
   <script src="admin.js"></script>
+  <script src="cotizador-pdf.js"></script>
   <script>
     if ("serviceWorker" in navigator) window.addEventListener("load", () => {
       navigator.serviceWorker.register("./sw.js").catch(() => {});
