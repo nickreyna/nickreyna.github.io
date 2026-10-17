@@ -286,3 +286,53 @@ $("cal-next").addEventListener("click",()=>{fechaCalendario=new Date(fechaCalend
 $("cal-hoy").addEventListener("click",()=>{fechaCalendario=new Date();pintarCalendario()});
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("ficha-modal").hidden)cerrarFicha()});
 if(accessToken) mostrarCRM();
+
+
+// Cotización creada manualmente desde el CRM. RLS de INSERT debe permitirlo al dueño.
+const PRECIOS_PLANES = {"Básico":240,"Estándar":380,"Plus":500};
+const cotizacionModal = $("nueva-modal");
+function abrirNuevaCotizacion(){
+  $("nueva-form").reset();
+  $("nueva-form").hidden=false;
+  $("nueva-exito").hidden=true;
+  $("nueva-msg").textContent="";
+  $("n-fecha").min=isoHoy();
+  cotizacionModal.hidden=false;
+  document.body.style.overflow="hidden";
+  $("n-cliente").focus();
+}
+function cerrarNuevaCotizacion(){cotizacionModal.hidden=true;document.body.style.overflow="";}
+$("btn-nueva-cotizacion").addEventListener("click",abrirNuevaCotizacion);
+$("cerrar-nueva").addEventListener("click",cerrarNuevaCotizacion);
+$("nueva-backdrop").addEventListener("click",cerrarNuevaCotizacion);
+$("nueva-otra").addEventListener("click",abrirNuevaCotizacion);
+$("n-plan").addEventListener("change",()=>{
+  const precio=PRECIOS_PLANES[$("n-plan").value];
+  if(precio!==undefined) $("n-total").value=precio;
+  else $("n-total").value="";
+});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!cotizacionModal.hidden)cerrarNuevaCotizacion()});
+$("nueva-form").addEventListener("submit",async e=>{
+  e.preventDefault();
+  const cliente=$("n-cliente").value.trim(), raw=$("n-whatsapp").value;
+  const telefono=normalizarTelefono(raw), plan=$("n-plan").value;
+  const total=Number($("n-total").value), fecha=$("n-fecha").value;
+  const msg=$("nueva-msg"), boton=$("guardar-nueva");
+  if(!/^51\d{9}$/.test(telefono)){msg.textContent="Ingresa un celular peruano válido.";return;}
+  if(!Number.isFinite(total)||total<0){msg.textContent="Revisa el precio.";return;}
+  const codigo=`NR-M-${new Date().toISOString().slice(2,10).replace(/-/g,"")}-${Math.random().toString(36).slice(2,8).toUpperCase()}`;
+  const payload={codigo,cliente,whatsapp:raw.trim(),tipo_evento:$("n-evento").value.trim(),fecha_evento:fecha,lugar:$("n-lugar").value.trim(),plan,total,estado:$("n-estado").value,acepta_contacto:true};
+  boton.disabled=true;msg.textContent="Guardando...";
+  try{
+    const r=await fetch(API,{method:"POST",headers:headers({"Content-Type":"application/json","Prefer":"return=representation"}),body:JSON.stringify(payload)});
+    if(!r.ok){const detail=await r.text();throw new Error(`No se pudo guardar (${r.status}). ${detail.slice(0,220)}`);}
+    const inserted=await r.json();
+    if(!Array.isArray(inserted)||!inserted[0])throw new Error("Guardado sin respuesta. Actualiza el listado antes de reintentar.");
+    const c=inserted[0];
+    cotizaciones.unshift(c);pintar();
+    const texto=`Hola ${cliente}, soy Nick Reyna DJ 🎧. Te comparto tu cotización ${codigo} para ${payload.tipo_evento} del ${fecha}: plan ${plan}, total S/${total.toFixed(2)}. Si deseas confirmar la fecha, coordinamos el adelanto. ¡Gracias!`;
+    $("nueva-whatsapp-link").href=`https://wa.me/${telefono}?text=${encodeURIComponent(texto)}`;
+    $("nueva-form").hidden=true;$("nueva-exito").hidden=false;msg.textContent="";
+  }catch(err){msg.textContent=err.message;}
+  finally{boton.disabled=false;}
+});

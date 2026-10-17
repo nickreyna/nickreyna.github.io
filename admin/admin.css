@@ -105,3 +105,12 @@ textarea:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(255,23,68,.08)}
 .prox-pendiente{color:var(--amber)!important;font-weight:900}
 .prox-pagado{color:var(--green)!important;font-weight:900}
 .prox strong{line-height:1.35}
+
+/* Cotizaciones manuales */
+.crm-acciones{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:18px}
+.nueva-ficha{max-width:670px}
+.nueva-ficha h2{font-size:26px;margin:7px 0}
+.nueva-exito{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:18px}
+.nueva-exito[hidden]{display:none}
+.nueva-exito p{color:var(--green);font-weight:800;width:100%;margin:0}
+@media(max-width:650px){.crm-acciones button{width:100%}.nueva-ficha{max-height:94dvh}.nueva-ficha .ficha-actions{flex-direction:column;align-items:stretch}.nueva-ficha .ficha-actions button{width:100%}}

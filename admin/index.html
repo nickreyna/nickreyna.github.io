@@ -6,6 +6,12 @@
   <meta name="robots" content="noindex,nofollow">
   <title>CRM | Nick Reyna DJ</title>
   <link rel="stylesheet" href="admin.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#070707">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Nick CRM">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 </head>
 <body>
   <main class="wrap">
@@ -28,6 +34,7 @@
         <button id="logout" class="secondary">Cerrar sesión</button>
       </header>
 
+      <div class="crm-acciones"><button type="button" id="btn-nueva-cotizacion">＋ Nueva cotización</button><span class="muted">Para clientes que te escriben directamente al WhatsApp</span></div>
       <div class="stats">
         <article><span>Total</span><strong id="stat-total">0</strong><small>Cotizaciones registradas</small></article>
         <article><span>Nuevas</span><strong id="stat-nuevas">0</strong><small>Por revisar</small></article>
@@ -79,6 +86,32 @@
       <div id="lista" class="lista"></div>
       <p id="crm-msg" class="msg"></p>
     </section>
+
+
+    <div id="nueva-modal" class="modal" hidden>
+      <div class="modal-backdrop" id="nueva-backdrop"></div>
+      <section class="ficha card nueva-ficha" role="dialog" aria-modal="true" aria-labelledby="nueva-titulo">
+        <button type="button" class="cerrar-ficha" id="cerrar-nueva" aria-label="Cerrar">×</button>
+        <span class="eyebrow">VENTA DIRECTA · WHATSAPP</span>
+        <h2 id="nueva-titulo">Nueva cotización</h2>
+        <p class="muted">Registra un cliente sin enviarlo al cotizador público.</p>
+        <form id="nueva-form">
+          <div class="form-grid">
+            <label>Nombre del cliente *<input id="n-cliente" required maxlength="120" autocomplete="name" placeholder="Nombre y apellido"></label>
+            <label>WhatsApp *<input id="n-whatsapp" inputmode="tel" required maxlength="20" placeholder="9XXXXXXXX"></label>
+            <label>Tipo de evento *<input id="n-evento" required maxlength="100" placeholder="Cumpleaños, boda, quinceañero..."></label>
+            <label>Fecha del evento *<input id="n-fecha" type="date" required></label>
+            <label>Lugar / distrito<input id="n-lugar" maxlength="180" placeholder="Trujillo, Huanchaco..."></label>
+            <label>Plan *<select id="n-plan" required><option value="">Selecciona un plan</option><option value="Básico">Básico · S/240</option><option value="Estándar">Estándar · S/380</option><option value="Plus">Plus · S/500</option><option value="Personalizado">Personalizado</option></select></label>
+            <label>Precio cotizado (S/) *<input id="n-total" type="number" min="0" step="0.01" required placeholder="380.00"></label>
+            <label>Estado<select id="n-estado"><option value="Nueva">Nueva</option><option value="Contactado">Contactado</option><option value="Separado">Separado</option></select></label>
+          </div>
+          <p class="muted" style="font-size:12px">El precio puede editarse para adicionales o acuerdos especiales. No registra pagos automáticamente.</p>
+          <div class="ficha-actions"><span id="nueva-msg" class="guardado" role="status"></span><button id="guardar-nueva" type="submit">Guardar cotización</button></div>
+        </form>
+        <div id="nueva-exito" hidden class="nueva-exito"><p>✓ Cotización guardada.</p><a id="nueva-whatsapp-link" class="whatsapp-btn" target="_blank" rel="noopener noreferrer">💬 Compartir por WhatsApp</a><button type="button" class="secondary" id="nueva-otra">Crear otra</button></div>
+      </section>
+    </div>
 
     <div id="ficha-modal" class="modal" hidden>
       <div class="modal-backdrop" data-cerrar="1"></div>
@@ -143,5 +176,10 @@
   </main>
 
   <script src="admin.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) window.addEventListener("load", () => {
+      navigator.serviceWorker.register("./sw.js").catch(() => {});
+    });
+  </script>
 </body>
 </html>
