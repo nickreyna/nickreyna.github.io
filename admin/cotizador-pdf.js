@@ -22,14 +22,31 @@
     catch(e) { input.focus(); input.click(); }
   });
 
+  const iconos={'DJ profesional':'🎧','Parlantes JBL EON 615':'🔊','Micrófonos':'🎤','PAR LED':'💡','Efecto Derby':'🌈','Máquina de burbujas':'🫧','Láser':'✨'};
   for(const [nombre,max] of equipos){
-    const fila=document.createElement('label');fila.className='equipo-fila';
-    const titulo=document.createElement('span');titulo.textContent=nombre;
-    const sel=document.createElement('select');sel.dataset.equipo=nombre;
+    const fila=document.createElement('div');fila.className='equipo-fila';
+    const titulo=document.createElement('span');titulo.className='equipo-titulo';titulo.textContent=(iconos[nombre]||'✓')+' '+nombre;
+    const subtitulo=document.createElement('small');subtitulo.textContent='MÁX. '+max+' · Selecciona la cantidad';
+    const ctrl=document.createElement('div');ctrl.className='equipo-control';
+    const menos=document.createElement('button');menos.type='button';menos.textContent='−';menos.setAttribute('aria-label','Reducir '+nombre);
+    const sel=document.createElement('select');sel.dataset.equipo=nombre;sel.setAttribute('aria-label','Cantidad de '+nombre);
     for(let n=0;n<=max;n++){const opt=document.createElement('option');opt.value=String(n);opt.textContent=String(n);sel.appendChild(opt);}
-    fila.append(titulo,sel);grid.appendChild(fila);
+    const mas=document.createElement('button');mas.type='button';mas.textContent='+';mas.setAttribute('aria-label','Aumentar '+nombre);
+    menos.addEventListener('click',()=>{sel.value=Math.max(0,Number(sel.value)-1);sel.dispatchEvent(new Event('change',{bubbles:true}));});
+    mas.addEventListener('click',()=>{sel.value=Math.min(max,Number(sel.value)+1);sel.dispatchEvent(new Event('change',{bubbles:true}));});
+    ctrl.append(menos,sel,mas);fila.append(titulo,subtitulo,ctrl);grid.appendChild(fila);
   }
-  function refresh(){ $('n-equipo-box').hidden=$('n-plan').value!=='Personalizado'; }
+  function resumen(){
+    const plan=$('n-plan').value;const total=Number($('n-total').value)||0;
+    $('n-resumen-plan').textContent=plan?('Plan: '+plan):'Selecciona tu plan';
+    const items=Array.from(grid.querySelectorAll('select')).filter(s=>Number(s.value)>0).map(s=>s.value+' × '+s.dataset.equipo);
+    $('n-resumen-equipo').textContent=plan==='Personalizado'?(items.join(' · ')||'Selecciona el equipo que necesites'):'Servicios incluidos según el paquete';
+    $('n-resumen-total').textContent='S/'+total.toFixed(2);
+    $('n-resumen-adelanto').textContent='S/'+(total/2).toFixed(2);
+  }
+  grid.addEventListener('change',resumen);$('n-total').addEventListener('input',resumen);
+  $('n-plan').addEventListener('change',resumen);
+  function refresh(){ $('n-equipo-box').hidden=$('n-plan').value!=='Personalizado'; resumen(); }
   $('n-plan').addEventListener('change',refresh);
   window.resetearCotizadorExtra=()=>{
     grid.querySelectorAll('select').forEach(s=>s.value='0');

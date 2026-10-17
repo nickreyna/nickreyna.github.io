@@ -92,29 +92,32 @@
       <div class="modal-backdrop" id="nueva-backdrop"></div>
       <section class="ficha card nueva-ficha" role="dialog" aria-modal="true" aria-labelledby="nueva-titulo">
         <button type="button" class="cerrar-ficha" id="cerrar-nueva" aria-label="Cerrar">×</button>
-        <span class="eyebrow">VENTA DIRECTA · WHATSAPP</span>
+        <span class="eyebrow">COTIZADOR NICK REYNA DJ · VENTA DIRECTA</span>
         <h2 id="nueva-titulo">Nueva cotización</h2>
-        <p class="muted">Registra un cliente sin enviarlo al cotizador público.</p>
+        <p class="muted">El mismo estilo de nuestro cotizador web, adaptado para atender clientes por WhatsApp y generar PDF.</p>
         <form id="nueva-form">
           <div class="form-grid">
+            <div class="cot-paso span-2"><span>1</span><div><strong>Datos del evento</strong><small>Cuéntame lo esencial para preparar tu cotización.</small></div></div>
             <label>Nombre del cliente *<input id="n-cliente" required maxlength="120" autocomplete="name" placeholder="Nombre y apellido"></label>
             <label>WhatsApp *<input id="n-whatsapp" inputmode="tel" required maxlength="20" placeholder="9XXXXXXXX"></label>
             <label>Tipo de evento *<input id="n-evento" required maxlength="100" placeholder="Cumpleaños, boda, quinceañero..."></label>
             <label>Fecha del evento *<span class="picker-line"><input id="n-fecha" type="date" required><button type="button" class="secondary picker-button" id="n-fecha-abrir">📅 Elegir fecha</button></span></label>
             <label>Lugar / distrito<input id="n-lugar" maxlength="180" placeholder="Trujillo, Huanchaco..."></label>
+            <div class="cot-paso span-2"><span>2</span><div><strong>Elige tu plan</strong><small>Paquete fijo o servicio personalizado.</small></div></div>
             <label>Plan *<select id="n-plan" required><option value="">Selecciona un plan</option><option value="Básico">Básico · S/240</option><option value="Estándar">Estándar · S/380</option><option value="Plus">Plus · S/500</option><option value="Personalizado">Personalizado</option></select></label>
             <label>Hora de inicio<select id="n-hora"><option value="">Elegir hora</option></select></label>
             <label>Duración del servicio (horas)<input id="n-horas" type="number" min="1" max="24" step="0.5" value="5"></label>
             <div class="span-2" id="n-equipo-box" hidden>
-              <strong>Equipos y servicios personalizados</strong>
+              <strong>Selecciona tu equipo</strong>
               <p class="muted" style="font-size:12px">Solo selecciona cantidades. Tú decides el precio final.</p>
               <div id="n-equipo-grid" class="equipo-grid"></div>
             </div>
+            <div class="cot-paso span-2"><span>3</span><div><strong>Precio y confirmación</strong><small>El precio final lo decides tú. Sin tarifas por equipo.</small></div></div>
             <label class="span-2">Detalle adicional / indicaciones<textarea id="n-descripcion" rows="2" placeholder="Por ejemplo, música para ceremonia, traslado especial..."></textarea></label>
             <label>Precio cotizado (S/) *<input id="n-total" type="number" min="0" step="0.01" required placeholder="380.00"></label>
             <label>Estado<select id="n-estado"><option value="Nueva">Nueva</option><option value="Contactado">Contactado</option><option value="Separado">Separado</option></select></label>
           </div>
-          <p class="muted" style="font-size:12px">El precio puede editarse para adicionales o acuerdos especiales. No registra pagos automáticamente.</p>
+          <div class="n-resumen"><strong>Resumen de la cotización</strong><span id="n-resumen-plan">Selecciona tu plan</span><span id="n-resumen-equipo"></span><div><span>Total acordado</span><strong id="n-resumen-total">S/0.00</strong></div><small>Adelanto 50%: <b id="n-resumen-adelanto">S/0.00</b> · El guardado no registra pagos automáticamente.</small></div>
           <div class="ficha-actions"><span id="nueva-msg" class="guardado" role="status"></span><button id="guardar-nueva" type="submit">Guardar cotización</button></div>
         </form>
         <div id="nueva-exito" hidden class="nueva-exito"><p>✓ Cotización guardada.</p><div class="pdf-acciones"><button type="button" id="nueva-pdf-compartir">📲 Compartir PDF</button><button type="button" id="nueva-pdf-descargar" class="secondary">⬇ Descargar PDF</button></div><p id="nueva-pdf-msg" class="muted" role="status"></p><a id="nueva-whatsapp-link" class="whatsapp-btn" target="_blank" rel="noopener noreferrer">💬 Compartir por WhatsApp</a><button type="button" class="secondary" id="nueva-otra">Crear otra</button></div>
@@ -184,7 +187,7 @@
   </main>
 
   <script src="admin.js?v=20261016-2"></script>
-  <script src="cotizador-pdf.js?v=20261016-2"></script>
+  <script src="cotizador-pdf.js?v=20261017-web-cotizador"></script>
   <script>
     if ("serviceWorker" in navigator) window.addEventListener("load", () => {
       navigator.serviceWorker.register("./sw.js").catch(() => {});
