@@ -3,10 +3,25 @@
   const $=id=>document.getElementById(id);
   const equipos=[
     ['DJ profesional',1],['Parlantes JBL EON 615',2],['Micrófonos',2],
-    ['PAR LED',2],['Efecto Derby',1],['Máquina de burbujas',1],['Láser',1]
+    ['PAR LED',4],['Efecto Derby',1],['Máquina de burbujas',1],['Láser',1]
   ];
   const limites=Object.fromEntries(equipos);
   const grid=$('n-equipo-grid');
+  // Time choices in half-hour steps: avoids typing on mobile and desktop.
+  const horaSelect=$('n-hora');
+  for(let h=0;h<24;h++) for(const m of [0,30]){
+    const time=String(h).padStart(2,'0')+':'+String(m).padStart(2,'0');
+    const opt=document.createElement('option'); opt.value=time;
+    const hh=h%12||12; opt.textContent=hh+':'+String(m).padStart(2,'0')+' '+(h<12?'a. m.':'p. m.');
+    horaSelect.appendChild(opt);
+  }
+  // Native calendar (Safari/Chrome/Brave); fall back to focusing the date input.
+  $('n-fecha-abrir').addEventListener('click',()=>{
+    const input=$('n-fecha');
+    try { if(typeof input.showPicker==='function') input.showPicker(); else {input.focus();input.click();} }
+    catch(e) { input.focus(); input.click(); }
+  });
+
   for(const [nombre,max] of equipos){
     const fila=document.createElement('label');fila.className='equipo-fila';
     const titulo=document.createElement('span');titulo.textContent=nombre;
@@ -93,9 +108,9 @@
   $('nueva-pdf-compartir').addEventListener('click',async()=>{
     try{
       const f=archivo();
-      if(!navigator.canShare||!navigator.canShare({files:[f]})||!navigator.share){$('nueva-pdf-msg').textContent='Este navegador no admite compartir archivos. Usa Descargar PDF y adjúntalo en WhatsApp.';return;}
+      if(!navigator.canShare||!navigator.canShare({files:[f]})||!navigator.share){$('nueva-pdf-msg').textContent='Este navegador no admite compartir PDF directamente. Descárgalo y adjúntalo en WhatsApp; en iPhone prueba Safari.';return;}
       await navigator.share({files:[f],title:'Cotización Nick Reyna DJ'});
       $('nueva-pdf-msg').textContent='Se abrió el menú para compartir.';
-    }catch(e){if(e.name!=='AbortError')$('nueva-pdf-msg').textContent='No se pudo compartir. Usa Descargar PDF.';}
+    }catch(e){if(e.name!=='AbortError')$('nueva-pdf-msg').textContent='No se pudo compartir ('+e.name+'). Usa Descargar PDF y adjúntalo en WhatsApp.';}
   });
 })();

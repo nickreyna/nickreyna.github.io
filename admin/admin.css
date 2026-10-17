@@ -122,3 +122,9 @@ textarea:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(255,23,68,.08)}
 .pdf-acciones{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}
 .nueva-exito{padding:14px 0}.nueva-ficha{max-height:94dvh;overflow:auto}
 @media(max-width:650px){.equipo-grid{grid-template-columns:1fr}.pdf-acciones button{flex:1}}
+
+/* V6 date and time controls */
+.picker-line{display:flex;gap:8px;align-items:center;margin-top:7px}
+.picker-line input{min-width:0;flex:1;margin-top:0}
+.picker-button{white-space:nowrap;padding:12px 10px;font-size:12px}
+@media(max-width:430px){.picker-line{flex-wrap:wrap}.picker-button{width:100%}}
